@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>『箱庭に注がれた甘美な蜜』 エンド判定ツール</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* 入力欄のシンプルなデザイン */
+        .name-input-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+        .name-field {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .name-field input {
+            padding: 8px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        /* 確定ボタンの演出 */
+        .action-area {
+            text-align: center;
+            margin: 30px 0;
+        }
+        .submit-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 35px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .submit-btn:hover {
+            background-color: #34495e;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+        /* 結末描写エリア（初期状態は非表示） */
+        .story-area {
+            display: none;
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 25px;
+            margin-top: 20px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+        .story-text {
+            white-space: pre-wrap;
+            font-size: 15px;
+            line-height: 1.8;
+            color: #2c3e50;
+        }
+        .story-section-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 20px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>『箱庭に注がれた甘美な蜜』 エンド判定ツール</h1>
+        <p class="subtitle">セッションの最終的な着地点を選択してください</p>
+    </header>
+
+    <div class="section">
+        <h2>探索者名（PC名）の登録</h2>
+        <div class="name-input-grid">
+            <div class="name-field">
+                <label><strong>HO1（ルーク）の名前</strong></label>
+                <input type="text" id="name_ho1" value="HO1">
+            </div>
+            <div class="name-field">
+                <label><strong>HO2（ナイト）の名前</strong></label>
+                <input type="text" id="name_ho2" value="HO2">
+            </div>
+            <div class="name-field">
+                <label><strong>HO3（ビショップ）の名前</strong></label>
+                <input type="text" id="name_ho3" value="HO3">
+            </div>
+            <div class="name-field">
+                <label><strong>HO4（キング）の名前</strong></label>
+                <input type="text" id="name_ho4" value="HO4">
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>0. 事件の真相（連続猟奇殺人事件の決着の形）</h2>
+        <div class="radio-group">
+            <label>
+                <input type="radio" name="case_truth" value="ho3_arrest" checked>
+                <div>
+                    <strong>HO3を逮捕・告発</strong>
+                    <span class="description">特捜班がHO3の正体を暴き、彼を連続猟奇殺人の犯人として現行犯逮捕、または身柄を拘束した。</span>
+                </div>
+            </label>
+            <label>
+                <input type="radio" name="case_truth" value="ho3_kill">
+                <div>
+                    <strong>HO3をその場で殺害・排除</strong>
+                    <span class="description">戦闘による死亡、あるいはHO1らの私刑によって、HO3をその場で殺害して決着とした。</span>
+                </div>
+            </label>
+            <label>
+                <input type="radio" name="case_truth" value="other_pc_arrest">
+                <div>
+                    <strong>HO3以外のPCを逮捕・告発</strong>
+                    <span class="description">HO3の隠蔽や誘導に騙され、無実のメンバー（7年前の遺体遺棄が露呈したHO2など）を犯人として連行した。</span>
+                </div>
+            </label>
+            <label>
+                <input type="radio" name="case_truth" value="other_pc_kill">
+                <div>
+                    <strong>HO3以外のPCを殺害</strong>
+                    <span class="description">HO3の工作や内輪揉めの狂気に呑まれ、無実の特捜班メンバーをその手で殺害してしまった。</span>
+                </div>
+            </label>
+            <label>
+                <input type="radio" name="case_truth" value="npc_arrest">
+                <div>
+                    <strong>NPC（別のカルトなど）を逮捕・告発</strong>
+                    <span class="description">「すべては外部のカルトの自作自演だった」として、事件を偽りの解決（HO3逃げ切り）とした。</span>
+                </div>
+            </label>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>1. HO1（ルーク）の最終行動</h2>
+        <div class="radio-group">
+            <label>
+                <input type="radio" name="ho1_choice" value="reason" checked>
+                <div>
+                    <strong>正義の執行</strong>
+                    <span class="description">真相を見抜き、憎しみを堪えてHO3を司法（あるいは特捜班）に引き渡した。</span>
+                </div>
+            </label>
+            <label>
+                <input type="radio" name="ho1_choice" value="blind_law">
+                <div>
+                    <strong>HO3以外を法で裁く</strong>
+                    <span class="description">工作に騙され、別の人物（HO2やNPCなど）を事件の犯人として告発・逮捕した。</span>
+                </div>
+            </label>
+            <label>
+                <input type="radio" name="ho1_choice" value="kill_ho3">
+                <div>
+                    <strong>復讐の完遂</strong>
+                    <span class="description">HO3が最愛の結色を殺した犯人だと見抜き、憎悪のままに彼をその手で射殺・殺害した。</span>
+                </div>
+            </label>
+            <label>
+                <input type="radio" name="ho1_choice" value="blind_kill">
+                <div>
+                    <strong>HO3以外を殺す</strong>
+                    <span class="description">工作に騙され、無実のメンバー（HO2など）や関係者を怨嗟のままに殺害した。</span>
+                </div>
+            </label>
+            <label>
+                <input type="radio" name="ho1_choice" value="bury">
+                <div>
+                    <strong>この事件を闇に葬る</strong>
+                    <span class="description">真相を知った上でHO3を匿う（監禁・飼育する）、あるいは全てに絶望して告発を諦めた。</span>
+                </div>
+            </label>
+            <label>
+                <input type="radio" name="ho1_choice" value="dead">
+                <div>
+                    <strong>ロスト</strong>
+                    <span class="description">決断を下す前に、地下での戦闘やPC間の銃撃戦によって死亡・ロストした。</span>
+                </div>
+            </label>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>2. HO2（ナイト）の最終選択</h2>
+        <div class="radio-group">
+            <label>
+                <input type="radio" name="ho2_choice" value="confess" checked>
+                <div>
+                    <strong>過去の自白</strong>
+                    <span class="description">7年前に結色の遺体を遺棄した罪を自白し、裁きを受け入れる覚悟を決めた。</span>
+                </div>
+            </label>
+            <label>
+                <input type="radio" name="ho2_choice" value="scapegoat">
+                <div>
+                    <strong>沈黙・隠蔽</strong>
+                    <span class="description">自白をしない、あるいは全ての罪を擦り付けられて真犯人に仕立て上げられた。</span>
+                </div>
+            </label>
+            <label>
+                <input type="radio" name="ho2_choice" value="blind">
+                <div>
+                    <strong>隠蔽の継続</strong>
+                    <span class="description">HO3の正体に気づかず、自分の過去の罪（遺体遺棄）も誰にもバレずに隠し通した。</span>
+                </div>
+            </label>
+            <label>
+                <input type="radio" name="ho2_choice" value="dead">
+                <div>
+                    <strong>ロスト</strong>
+                    <span class="description">決断を下す前に、地下での戦闘やPC間の銃撃戦によって死亡・ロストした。</span>
+                </div>
+            </label>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>3. HO3（ビショップ）の結末ステータス</h2>
+        <div class="radio-group">
+            <label>
+                <input type="radio" name="ho3_status" value="arrest" checked>
+                <div>
+                    <strong>身柄拘束</strong>
+                    <span class="description">HO3は生存しており、特捜班や警察組織によって身柄を拘束されている。</span>
+                </div>
+            </label>
+            <label>
+                <input type="radio" name="ho3_status" value="win">
+                <div>
+                    <strong>逃亡</strong>
+                    <span class="description">他のメンバーを全員殺害・無力化し、完全に逃げ切った。</span>
+                </div>
+            </label>
+            <label>
+                <input type="radio" name="ho3_status" value="dead">
+                <div>
+                    <strong>ロスト</strong>
+                    <span class="description">HO3は戦闘で死亡した、またはPCたちに直接殺害された。</span>
+                </div>
+            </label>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>4. HO4（キング）の最終選択</h2>
+        <div class="radio-group">
+            <label>
+                <input type="radio" name="ho4_choice" value="rebel" checked>
+                <div>
+                    <strong>実父への反逆</strong>
+                    <span class="description">警視総監・九条院司の呪縛を断ち切り、実父を社会的に告発、あるいは物理的に排除した。</span>
+                </div>
+            </label>
+            <label>
+                <input type="radio" name="ho4_choice" value="accomplice">
+                <div>
+                    <strong>現状維持</strong>
+                    <span class="description">これ以上の破滅を恐れ、九条院司の提示した「甘美な蜜（権力・地位）」に屈して従った。</span>
+                </div>
+            </label>
+            <label>
+                <input type="radio" name="ho4_choice" value="dead">
+                <div>
+                    <strong>ロスト</strong>
+                    <span class="description">決断を下す前に、地下での激しい死闘やPC間の対立によって死亡・ロストした。</span>
+                </div>
+            </label>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>5. 黒幕（九条院司）の顛末</h2>
+        <div class="radio-group">
+            <label>
+                <input type="radio" name="boss_truth" value="boss_arrest" checked>
+                <div>
+                    <strong>九条総監を逮捕・社会的告発</strong>
+                    <span class="description">持ち帰った証拠（SDカード）を突きつけ、九条総監のすべてを公に告発・失脚させた。</span>
+                </div>
+            </label>
+            <label>
+                <input type="radio" name="boss_truth" value="boss_kill">
+                <div>
+                    <strong>九条総監を暗殺・物理的抹殺</strong>
+                    <span class="description">実父への反逆（HO4）や復讐の弾丸として、九条院司を物理的に抹殺した。</span>
+                </div>
+            </label>
+            <label>
+                <input type="radio" name="boss_truth" value="boss_alive">
+                <div>
+                    <strong>九条総監の留任（闇の維持）</strong>
+                    <span class="description">証拠を揉み消された、あるいは脅迫に屈したため、総監の権力は手付かずのまま維持された。</span>
+                </div>
+            </label>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>6. クライマックスの戦況・システムフラグ</h2>
+        <div class="checkbox-group">
+            <label>
+                <input type="checkbox" id="status_myth" checked>
+                <div>
+                    <strong>[神話生物の撃破]</strong>
+                    <span class="description">『アブホースの落とし子』のHPを0以下にして撃破した。</span>
+                </div>
+            </label>
+            <label>
+                <input type="checkbox" id="status_evidence" checked>
+                <div>
+                    <strong>[証拠の地上持ち帰り]</strong>
+                    <span class="description">結色の死蝋（胃袋）からSDカードを回収し、地上へ生還した。</span>
+                </div>
+            </label>
+        </div>
+    </div>
+
+    <div id="resultBox" class="result-area">
+        <div class="result-title">現在の条件による確定ルート</div>
+        <div id="resultName" class="result-name">計算中...</div>
+    </div>
+
+    <div class="action-area">
+        <button type="button" class="submit-btn" onclick="generateStoryEnding()">END描写へ</button>
+    </div>
+
+    <div id="storyArea" class="story-area">
+        <h2 style="border-left: 4px solid var(--primary-color); padding-left: 10px; margin-top:0;">📖 終局の物語（エンディング描写）</h2>
+        <div id="storyOutput" class="story-text"></div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
