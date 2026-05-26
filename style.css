@@ -83,7 +83,8 @@ label {
     transition: background-color 0.2s;
 }
 
-label:hover {
+.radio-group label:hover,
+.checkbox-group label:hover {
     background-color: #f0f2f5;
 }
 
