@@ -215,6 +215,7 @@ input[type="radio"], input[type="checkbox"] {
 @media (max-width: 600px) {
     /* 名前入力欄を1列（縦並び）に変更して潰れるのを防ぐ */
     .name-input-grid {
+        display: no;
         grid-template-columns: 1fr;
         gap: 10px;
     }
