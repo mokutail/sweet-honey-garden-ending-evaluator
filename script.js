@@ -1,8 +1,6 @@
-// グローバル変数として現在の確定エンドコードを保持
 let currentEndingCode = 'A';
 
 function evaluateEnding() {
-    // HTMLの全選択肢の値を正確に取得
     const caseEnd = document.querySelector('input[name="case_end"]:checked').value;
     const ho1Status = document.querySelector('input[name="ho1_status"]:checked').value;
     const ho2Status = document.querySelector('input[name="ho2_status"]:checked').value;
@@ -12,7 +10,6 @@ function evaluateEnding() {
     const statusMyth = document.getElementById('status_myth').checked;
     const statusEvidence = document.getElementById('status_evidence').checked;
     
-    // 生存フラグの判定
     const ho1Alive = (ho1Status !== 'dead');
     const ho2Alive = (ho2Status !== 'dead');
     const ho3Alive = (ho3Status !== 'dead');
@@ -21,27 +18,24 @@ function evaluateEnding() {
     const resultBox = document.getElementById('resultBox');
     const resultName = document.getElementById('resultName');
 
-    // クラスのリセット
     resultBox.className = 'result-area';
 
     // ====================================================
-    // 1. 最優先システムバッド：【END C：泥濘に沈む真実】
+    // 1. 【END C：泥濘に沈む真実】
     // ====================================================
-    // アブホース未撃破、またはSDカード紛失、または特捜班が全員死亡の場合
+    // 神話生物の未撃破、またはSDカード不所持、または特捜班が全員死亡の場合
     if (!statusMyth || !statusEvidence || (!ho1Alive && !ho2Alive && !ho3Alive && !ho4Alive)) {
         resultBox.classList.add('end-C');
-        resultName.innerText = '【END C：泥濘に沈む真実（箱庭の維持）】へ分岐';
+        resultName.innerText = '【END C：泥濘に沈む真実】へ分岐';
         currentEndingCode = 'C';
         return;
     }
 
     // ====================================================
-    // 2. カルト化・屈服エンド：【END H：蜜に群がる羽虫たち】
+    // 2. 【END H：蜜に群がる羽虫たち】
     // ====================================================
-    // このエンドの発生条件は、全員が生存偏りなどの個別エンドに引っかからず、九条の蜜に屈した場合
-    // 後述のハッピーやビターの条件を満たさない、あるいは全体として隠蔽を選んだ場合等に連動
-    if (caseEnd === 'bury_end' && ho4Choice === 'return' && ho1Status === 'alive_justice') {
-        // HO1が監禁ではなく純粋な事件隠蔽（諦め）で、HO4も通常生還（実父への服従）の場合、魂の腐敗ルートへ
+    // 特捜班が全員生存（または主要PC生存）で、全体結末として「事件の隠蔽（蜜への屈服）」を選択した場合
+    if (caseEnd === 'bury_end' && ho1Status === 'alive_justice') {
         resultBox.classList.add('end-H');
         resultName.innerText = '【END H：蜜に群がる羽虫たち】へ分岐';
         currentEndingCode = 'H';
@@ -49,64 +43,20 @@ function evaluateEnding() {
     }
 
     // ====================================================
-    // 3. HO3完全勝利・芸術完成：【END B：完全なるシンメトリー】
+    // 3. 【END B：完全なるシンメトリー】
     // ====================================================
-    // HO3が一人勝ちしている、または他PCが全滅してHO3が生存している場合
+    // HO3が一人勝ち（逃亡）した、あるいは他PCが全員死亡してHO3だけが生存している場合
     if (ho3Status === 'win' || (!ho1Alive && !ho2Alive && !ho4Alive && ho3Alive)) {
         resultBox.classList.add('end-B');
-        resultName.innerText = '【END B：完全なるシンメトリー】へ分岐';
+        resultName.innerText = '【END B：完璧なアシンメトリー】へ分岐';
         currentEndingCode = 'B';
         return;
     }
 
     // ====================================================
-    // 4. 狂気・共犯・耽美エンド：【END J：共犯者の輪舞曲】
+    // 4. 【END G：完璧なる駒の叛逆】
     // ====================================================
-    // 全体結末が隠蔽、かつHO1が「執着と狂気（HO3の守護・加担）」を選んでおり、HO3が一人勝ち・ロストしていない場合
-    if (caseEnd === 'bury_end' && ho1Status === 'alive_obsess' && ho3Status === 'arrest') {
-        // ※PLの解釈やRPによって、手を取り合う最悪の共犯者となる場合はJへ
-        resultBox.classList.add('end-J');
-        resultName.innerText = '【END J：共犯者の輪舞曲（ロンド）】へ分岐';
-        currentEndingCode = 'J';
-        return;
-    }
-
-    // ====================================================
-    // 5. 狂気・監禁・飼育エンド：【END E：楽園の檻、あるいは飼育】
-    // ====================================================
-    // 全員生存ベースで、HO1が「執着と狂気」を選択し、HO3が檻（身柄拘束/監禁）にいる場合
-    if (ho1Status === 'alive_obsess' && ho3Status === 'arrest' && ho2Alive && ho4Alive) {
-        resultBox.classList.add('end-E');
-        resultName.innerText = '【END E：楽園の檻、あるいは飼育】へ分岐';
-        currentEndingCode = 'E';
-        return;
-    }
-
-    // ====================================================
-    // 6. 生存偏りによる少人数ビターエンド：【END L】 / 【END M】
-    // ====================================================
-    // HO2とHO4が死亡（ロスト）し、地下にHO1とHO3だけが残された場合
-    if (ho1Alive && !ho2Alive && !ho4Alive) {
-        // HO1が執着（あるいは事件隠蔽）を選び、HO3が生きているなら【L：檻の中の二人】
-        if ((ho1Status === 'alive_obsess' || caseEnd === 'bury_end') && ho3Alive) {
-            resultBox.classList.add('end-L');
-            resultName.innerText = '【END L：檻の中の二人】へ分岐';
-            currentEndingCode = 'L';
-            return;
-        }
-        // HO1が復讐完遂を選んだ、またはHO3が死亡しているなら【M：夜霧に消える弾痕】
-        if (ho1Status === 'alive_revenge' || caseEnd === 'ho3_kill' || !ho3Alive) {
-            resultBox.classList.add('end-M');
-            resultName.innerText = '【END M：夜霧に消える弾痕】へ分岐';
-            currentEndingCode = 'M';
-            return;
-        }
-    }
-
-    // ====================================================
-    // 7. HO4（キング）孤高の特攻・告発：【END G：完璧なる駒の叛逆】
-    // ====================================================
-    // HO1、HO2、HO3が全員ロストし、HO4一人のみが生存して生還した場合
+    // HO1、HO2、HO3が全員ロストし、HO4一人のみが孤高の生還を果たした場合
     if (!ho1Alive && !ho2Alive && !ho3Alive && ho4Alive) {
         resultBox.classList.add('end-G');
         resultName.innerText = '【END G：完璧なる駒の叛逆】へ分岐';
@@ -115,9 +65,20 @@ function evaluateEnding() {
     }
 
     // ====================================================
-    // 8. 冤罪の告発・トカゲの尻尾切り：【END F：身代わりの洗礼】
+    // 5. 【END E：楽園の檻】
     // ====================================================
-    // 全体結末が「冤罪の幕引き（他PCの身代わり）」になっている場合
+    // HO1が「執着と狂気（HO3の守護・監禁）」を選択し、かつHO3が生存（身柄拘束/監禁）している場合
+    if (ho1Status === 'alive_obsess' && ho3Status === 'arrest') {
+        resultBox.classList.add('end-E');
+        resultName.innerText = '【END E：楽園の檻】へ分岐';
+        currentEndingCode = 'E';
+        return;
+    }
+
+    // ====================================================
+    // 6. 【END F：身代わりの洗礼】
+    // ====================================================
+    // 全体の結末として「冤罪の幕引き」が選ばれた、またはHO2に罪が擦り付けられた場合
     if (caseEnd === 'scapegoat_end' || ho2Status === 'scapegoat') {
         resultBox.classList.add('end-F');
         resultName.innerText = '【END F：身代わりの洗礼】へ分岐';
@@ -126,40 +87,20 @@ function evaluateEnding() {
     }
 
     // ====================================================
-    // 9. 真相未到達・不気味な日常の継続：【END N】 / 【END O】
+    // 7. 【END D：復讐の連鎖】
     // ====================================================
-    // 誰も真相を見抜けず（あるいはNPCをホシにして）解決とした場合
-    if (caseEnd === 'npc_end') {
-        // HO2が隠蔽の継続（過去の罪がバレていない）を選んでいる場合、誰も気づかない【O：羊たちの沈黙】
-        if (ho2Status === 'blind') {
-            resultBox.classList.add('end-O');
-            resultName.innerText = '【END O：羊たちの沈黙】へ分岐';
-            currentEndingCode = 'O';
-            return;
-        } else {
-            // そうでなければ、真犯人を隣に据えたままの【N：蛇を育む箱庭】
-            resultBox.classList.add('end-N');
-            resultName.innerText = '【END N：蛇を育む箱庭】へ分岐';
-            currentEndingCode = 'N';
-            return;
-        }
-    }
-
-    // ====================================================
-    // 10. 復讐の完遂・殺人鬼への転落（全員生存ベース）：【END D】
-    // ====================================================
-    // 全体の結末が「HO3の抹殺」、あるいはHO1が「復讐の完遂」を選んだ、またはHO3が死亡した場合
-    if (caseEnd === 'ho3_kill' || ho1Status === 'alive_revenge' || !ho3Alive) {
+    // HO1のステータスが明確に「復讐の完遂（殺害意図をもって引き金を引いた）」である場合のみDへ
+    if (ho1Status === 'alive_revenge') {
         resultBox.classList.add('end-D');
-        resultName.innerText = '【END D：復讐の連鎖と、残された首輪】へ分岐';
+        resultName.innerText = '【END D：復讐の連鎖】へ分岐';
         currentEndingCode = 'D';
         return;
     }
 
     // ====================================================
-    // 11. メイン・グッドエンド：【END A：箱庭の崩壊と、光差す夜明け】
+    // 8. 【END A：箱庭の崩壊と、光差す夜明け】
     // ====================================================
-    // 全条件達成：アブホース撃破・SDあり・HO3逮捕・HO1正義・HO2自白・HO4通常生還（反逆貫徹）
+    // 条件クリア：アブホース撃破・SDあり・HO3の逮捕・HO1が理性を保ち（正義の執行）・HO2自白・HO4通常生還
     if (caseEnd === 'ho3_arrest' && ho1Status === 'alive_justice' && ho2Status === 'confess' && ho4Choice === 'return') {
         resultBox.classList.add('end-A');
         resultName.innerText = '【END A：箱庭の崩壊と、光差す夜明け】へ分岐';
@@ -167,9 +108,11 @@ function evaluateEnding() {
         return;
     }
 
-    // どの条件にも完全に当てはまらなかった場合の包括的な個別エピローグ用分岐
-    resultName.innerText = '【特捜班の個別エピローグへ（条件組み合わせ）】';
-    currentEndingCode = 'GENERIC';
+    // 激闘によるHO3の死亡ロストなど、通常のハッピー条件から外れた戦闘終了パターンは
+    // すべて大元であるグッドエンド【END A】へ着地（HO3死亡時のアナウンス等はGMがアドリブで対応可能）
+    resultBox.classList.add('end-A');
+    resultName.innerText = '【END A：箱庭の崩壊と、光差す夜明け】へ分岐';
+    currentEndingCode = 'A';
 }
 
 function generateStoryEnding() {
@@ -181,16 +124,6 @@ function generateStoryEnding() {
     const storyArea = document.getElementById('storyArea');
     const storyOutput = document.getElementById('storyOutput');
 
-    if (currentEndingCode === 'GENERIC') {
-        storyOutput.innerHTML = `
-            <div style="font-weight: bold; font-size: 18px; color: #7f8c8d; margin-bottom: 15px;">【特捜班の個別エピローグへ】</div>
-            主軸の事件は終了しました。生き残ったメンバー（HO1: ${p1} / HO2: ${p2} / HO3: ${p3} / HO4: ${p4}）それぞれの最終ステータスを組み合わせて、個別の物語を描写してください。`;
-        storyArea.style.display = 'block';
-        storyArea.scrollIntoView({ behavior: 'smooth' });
-        return;
-    }
-
-    // 確定したアルファベットのファイルをフェッチして読み込む
     const filePath = `./endings/end_${currentEndingCode}.html`;
 
     fetch(filePath)
@@ -199,7 +132,6 @@ function generateStoryEnding() {
             return response.text();
         })
         .then(htmlText => {
-            // テキスト内の[HO1]〜[HO4]を、入力されたPC名に確実に一括置換
             let formattedText = htmlText
                 .replace(/\[HO1\]/g, p1)
                 .replace(/\[HO2\]/g, p2)
@@ -213,17 +145,15 @@ function generateStoryEnding() {
         .catch(error => {
             console.error(error);
             storyOutput.innerHTML = `
-                <div style="font-weight: bold; font-size: 18px; color: #e74c3c; margin-bottom: 15px;">確定結慢コード: 【END ${currentEndingCode}】</div>
-                <p>外部ファイルの読み込みに失敗しました。endingsフォルダ内の [end_${currentEndingCode}.html] の中身を出力してください。</p>`;
+                <div style="font-weight: bold; font-size: 18px; color: #e74c3c; margin-bottom: 15px;">確定結末コード: 【END ${currentEndingCode}】</div>
+                <p>endingsフォルダ内の [end_${currentEndingCode}.html] を出力します。</p>`;
             storyArea.style.display = 'block';
             storyArea.scrollIntoView({ behavior: 'smooth' });
         });
 }
 
-// すべてのラジオボタンとチェックボックスに入力変更時の自動再計算イベントを付与
 document.querySelectorAll('input[type="radio"], input[type="checkbox"]').forEach(input => {
     input.addEventListener('change', evaluateEnding);
 });
 
-// 初回読み込み時に計算
 evaluateEnding();
