@@ -16,35 +16,41 @@
     --color-h: #34495e;
 }
 
+/* ボックスモデルをすべて padding 込みの計算に統一（横はみ出し防止） */
+* {
+    box-sizing: border-box;
+}
+
 body {
     font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
     background-color: var(--bg-color);
     color: var(--text-color);
     line-height: 1.6;
     margin: 0;
-    padding: 20px;
+    padding: 15px; /* スマホ用に余白を少し狭めて画面を広く */
 }
 
 .container {
     max-width: 800px;
     margin: 0 auto;
+    width: 100%;
 }
 
 header {
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
     padding-bottom: 10px;
     border-bottom: 3px solid var(--primary-color);
 }
 
 h1 {
     color: var(--primary-color);
-    font-size: 24px;
-    margin: 0 0 10px 0;
+    font-size: 22px; /* スマホで見やすいように少しだけ小さく調整 */
+    margin: 0 0 8px 0;
 }
 
 .subtitle {
-    font-size: 14px;
+    font-size: 13px;
     color: #7f8c8d;
     margin: 0;
 }
@@ -52,14 +58,14 @@ h1 {
 .section {
     background: var(--panel-bg);
     border-radius: 8px;
-    padding: 20px;
-    margin-bottom: 20px;
+    padding: 15px; /* スマホ用に内側の余白を最適化 */
+    margin-bottom: 15px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.05);
     border: 1px solid var(--border-color);
 }
 
 h2 {
-    font-size: 16px;
+    font-size: 15px;
     color: var(--primary-color);
     margin-top: 0;
     margin-bottom: 15px;
@@ -67,20 +73,50 @@ h2 {
     border-left: 4px solid var(--primary-color);
 }
 
-.radio-group, .checkbox-group {
-    display: flex;
-    flex-direction: column;
+/* パソコン・タブレットでは2列、スマホでは縦1列に自動切替 */
+.name-input-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     gap: 12px;
 }
 
+.name-field {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.name-field label {
+    font-size: 13px;
+    padding: 0;
+}
+
+.name-field input {
+    padding: 10px; /* タップしやすいように少し厚めに */
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 14px;
+    width: 100%;
+    -webkit-appearance: none; /* iOS(iPhone)の入力欄のデフォルト影を消す */
+}
+
+.radio-group, .checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* ラジオボタンとチェックボックスのタップエリア拡大 */
 label {
     display: flex;
     align-items: flex-start;
     gap: 10px;
     cursor: pointer;
-    padding: 6px 10px;
+    padding: 8px 10px; /* スマホで誤タップを防ぐための余白 */
     border-radius: 4px;
     transition: background-color 0.2s;
+    font-size: 14px;
+    width: 100%;
 }
 
 .radio-group label:hover,
@@ -88,9 +124,11 @@ label {
     background-color: #f0f2f5;
 }
 
+/* スマホの指でも確実にタップしやすいように調整 */
 input[type="radio"], input[type="checkbox"] {
-    margin-top: 5px;
-    transform: scale(1.1);
+    margin-top: 4px;
+    flex-shrink: 0; /* 文字が長くなってもボタン自体が潰れないように固定 */
+    transform: scale(1.2);
     cursor: pointer;
 }
 
@@ -98,7 +136,8 @@ input[type="radio"], input[type="checkbox"] {
     font-size: 12px;
     color: #7f8c8d;
     display: block;
-    margin-top: 2px;
+    margin-top: 4px;
+    line-height: 1.4;
 }
 
 .divider {
@@ -107,46 +146,60 @@ input[type="radio"], input[type="checkbox"] {
     margin: 15px 0;
 }
 
-/* 判定エリアのスタイル */
+/* 判定エリアのスタイル（スマホでも追従） */
 .result-area {
     position: sticky;
-    bottom: 20px;
+    bottom: 15px;
     background: var(--primary-color);
     color: #ffffff;
     border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    margin-top: 30px;
+    padding: 15px;
+    box-shadow: 0 4px 15 rgba(0,0,0,0.2);
+    margin-top: 25px;
     transition: all 0.3s ease;
+    z-index: 1000; /* 他の要素の下に隠れないように前面へ */
 }
 
 .result-title {
-    font-size: 14px;
+    font-size: 11px;
     text-transform: uppercase;
     letter-spacing: 1px;
-    margin-bottom: 5px;
+    margin-bottom: 4px;
     opacity: 0.8;
 }
 
 .result-name {
-    font-size: 20px;
+    font-size: 16px; /* スマホ画面の幅に合わせて少しマイルドに */
     font-weight: bold;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
+    line-height: 1.3;
 }
 
 .result-desc {
-    font-size: 14px;
+    font-size: 12px;
     opacity: 0.9;
     background: rgba(255,255,255,0.1);
-    padding: 12px;
+    padding: 10px;
     border-radius: 6px;
     margin: 0;
+    line-height: 1.5;
 }
 
-/* エンドごとのテーマカラー適用（JSから動的に付与されます） */
+/* 動きのあるテキスト出力エリア */
+.story-area {
+    padding: 15px;
+    margin-top: 20px;
+}
+
+.story-text {
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+/* エンドごとのテーマカラー適用（JS用） */
 .end-A { background-color: var(--color-a) !important; }
 .end-B { background-color: var(--color-b) !important; }
 .end-C { background-color: var(--color-c) !important; }
@@ -155,3 +208,24 @@ input[type="radio"], input[type="checkbox"] {
 .end-F { background-color: var(--color-f) !important; }
 .end-G { background-color: var(--color-g) !important; }
 .end-H { background-color: var(--color-h) !important; }
+
+/* ====================================================
+   スマートフォン向け（画面横幅が600px以下）の微調整
+   ==================================================== */
+@media (max-width: 600px) {
+    /* 名前入力欄を1列（縦並び）に変更して潰れるのを防ぐ */
+    .name-input-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    
+    /* 固定判定エリアの文字サイズをスマホに最適化 */
+    .result-name {
+        font-size: 15px;
+    }
+    
+    .result-desc {
+        font-size: 12px;
+        padding: 8px;
+    }
+}
