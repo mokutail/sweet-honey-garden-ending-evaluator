@@ -61,14 +61,6 @@
             line-height: 1.8;
             color: #2c3e50;
         }
-        .story-section-title {
-            font-size: 16px;
-            font-weight: bold;
-            margin-top: 20px;
-            padding-bottom: 5px;
-            border-bottom: 1px solid var(--border-color);
-            color: var(--primary-color);
-        }
     </style>
 </head>
 <body>
@@ -102,45 +94,65 @@
     </div>
 
     <div class="section">
-        <h2>1. HO1（ルーク）の最終行動</h2>
+        <h2>1. 連続猟奇殺人事件の結着（全体の結末）</h2>
         <div class="radio-group">
             <label>
-                <input type="radio" name="ho1_choice" value="reason" checked>
+                <input type="radio" name="case_end" value="ho3_arrest" checked>
                 <div>
-                    <strong>HO3以外を法で裁く</strong>
-                    <span class="description">真相を見抜き、憎しみを堪えてHO3を司法（あるいは特捜班）に引き渡した。</span>
+                    <strong>HO3の身柄拘束（逮捕・告発）</strong>
+                    <span class="description">真犯人がHO3であることを見抜き、司法（あるいは特捜班）の手で彼を現行犯逮捕、または拘束した。</span>
                 </div>
             </label>
             <label>
-                <input type="radio" name="ho1_choice" value="blind_law">
+                <input type="radio" name="case_end" value="ho3_kill">
                 <div>
-                    <strong>HO3以外を法で裁く</strong>
-                    <span class="description">工作に騙され、別の人物（HO2やNPCなど）を事件の犯人として告発・逮捕した。</span>
+                    <strong>HO3の抹殺（私刑・戦闘不服）</strong>
+                    <span class="description">HO3の正体を見抜いた上でその手で射殺した、あるいは戦闘によってHO3を死亡させて決着とした。</span>
                 </div>
             </label>
             <label>
-                <input type="radio" name="ho1_choice" value="kill_ho3">
+                <input type="radio" name="case_end" value="scapegoat_end">
                 <div>
-                    <strong>HO3を殺す</strong>
-                    <span class="description">HO3が最愛の結色を殺した犯人だと見抜き、憎悪のままに彼をその手で射殺・殺害した。</span>
+                    <strong>冤罪の幕引き（工作の完遂）</strong>
+                    <span class="description">HO3の工作に騙され、あるいは自白により、無実のメンバー（HO2など）を真犯人として処理・連行した。</span>
                 </div>
             </label>
             <label>
-                <input type="radio" name="ho1_choice" value="blind_kill">
+                <input type="radio" name="case_end" value="bury_end">
                 <div>
-                    <strong>HO3以外を殺す</strong>
-                    <span class="description">工作に騙され、無実のメンバー（HO2など）や関係者を怨嗟のままに殺害した。</span>
+                    <strong>事件の隠蔽（闇への埋没）</strong>
+                    <span class="description">真相を知った上で、愛憎や絶望から事件のすべてを公にせず闇に葬ることを選択した。</span>
+                </div>
+            </label>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>2. HO1（ルーク）の最終ステータス</h2>
+        <div class="radio-group">
+            <label>
+                <input type="radio" name="ho1_status" value="alive_justice" checked>
+                <div>
+                    <strong>正義の執行</strong>
+                    <span class="description">生存。憎しみを堪えて正義を貫いた、あるいは真犯人を見誤ったまま生き残った。</span>
                 </div>
             </label>
             <label>
-                <input type="radio" name="ho1_choice" value="bury">
+                <input type="radio" name="ho1_status" value="alive_revenge">
                 <div>
-                    <strong>この事件を闇に葬る</strong>
-                    <span class="description">真相を知った上でHO3を匿う（監禁・飼育する）、あるいは全てに絶望して告発を諦めた。</span>
+                    <strong>復讐の完遂</strong>
+                    <span class="description">生存。自らの憎悪のままに、引き金を引いて復讐（または私刑による殺害）を果たした。</span>
                 </div>
             </label>
             <label>
-                <input type="radio" name="ho1_choice" value="dead">
+                <input type="radio" name="ho1_status" value="alive_obsess">
+                <div>
+                    <strong>執着と狂気</strong>
+                    <span class="description">生存。愛憎の果てに真犯人（HO3）を自分の手元に隠匿・監禁することを選んだ。</span>
+                </div>
+            </label>
+            <label>
+                <input type="radio" name="ho1_status" value="dead">
                 <div>
                     <strong>ロスト</strong>
                     <span class="description">決断を下す前に、地下での戦闘やPC間の銃撃戦によって死亡・ロストした。</span>
@@ -150,33 +162,26 @@
     </div>
 
     <div class="section">
-        <h2>2. HO2（ナイト）の最終選択</h2>
+        <h2>3. HO2（ナイト）の最終ステータス</h2>
         <div class="radio-group">
             <label>
-                <input type="radio" name="ho2_choice" value="confess" checked>
+                <input type="radio" name="ho2_status" value="confess" checked>
                 <div>
-                    <strong>過去の自白</strong>
-                    <span class="description">7年前に結色の遺体を遺棄した罪を自白し、裁きを受け入れる覚悟を決めた。</span>
+                    <strong>生存：過去の自白</strong>
+                    <span class="description">生存。7年前に結色の遺体を遺棄した罪を自白し、裁きを受け入れる覚悟を決めた。</span>
                 </div>
             </label>
             <label>
-                <input type="radio" name="ho2_choice" value="scapegoat">
+                <input type="radio" name="ho2_status" value="blind">
                 <div>
-                    <strong>身代わり</strong>
-                    <span class="description">自白をしない、あるいは全ての罪を擦り付けられて真犯人に仕立て上げられた。</span>
+                    <strong>生存：隠蔽の継続</strong>
+                    <span class="description">生存。自分の過去の罪（遺体遺棄）も、誰にもバレずに隠し通したまま生還した。</span>
                 </div>
             </label>
             <label>
-                <input type="radio" name="ho2_choice" value="blind">
+                <input type="radio" name="ho2_status" value="dead">
                 <div>
-                    <strong>隠蔽の継続</strong>
-                    <span class="description">HO3の正体に気づかず、自分の過去の罪（遺体遺棄）も誰にもバレずに隠し通した。</span>
-                </div>
-            </label>
-            <label>
-                <input type="radio" name="ho2_choice" value="dead">
-                <div>
-                    <strong>ロスト</strong>
+                    <strong>ロスト（死亡）</strong>
                     <span class="description">決断を下す前に、地下での戦闘やPC間の銃撃戦によって死亡・ロストした。</span>
                 </div>
             </label>
@@ -184,61 +189,61 @@
     </div>
 
     <div class="section">
-        <h2>3. HO3（ビショップ）の結末ステータス</h2>
+        <h2>4. HO3（ビショップ）の最終ステータス</h2>
         <div class="radio-group">
             <label>
                 <input type="radio" name="ho3_status" value="arrest" checked>
                 <div>
-                    <strong>身柄拘束</strong>
-                    <span class="description">HO3は生存しており、特捜班や警察組織によって身柄を拘束されている。</span>
+                    <strong>身柄拘束 / 監禁</strong>
+                    <span class="description">生存。特捜班や警察組織に身柄を拘束されている、あるいは誰かの檻に閉じ込められている。</span>
                 </div>
             </label>
             <label>
                 <input type="radio" name="ho3_status" value="win">
                 <div>
-                    <strong>逃亡</strong>
-                    <span class="description">他のメンバーを全員殺害・無力化し、完全に逃げ切った。</span>
+                    <strong>逃亡 / 一人勝ち</strong>
+                    <span class="description">生存。他のメンバーを全員殺害・無力化、あるいは完全に欺いて何食わぬ顔で逃げ切った。</span>
                 </div>
             </label>
             <label>
                 <input type="radio" name="ho3_status" value="dead">
                 <div>
-                    <strong>ロスト</strong>
-                    <span class="description">HO3は戦闘で死亡した、またはPCたちに直接殺害された。</span>
+                    <strong>ロスト（死亡）</strong>
+                    <span class="description">戦闘で死亡した、またはPCたちに直接殺害されて冷たい骸となった。</span>
                 </div>
             </label>
         </div>
     </div>
 
-<div class="section">
-    <h2>4. HO4（キング）の最終選択</h2>
-    <div class="radio-group">
-        <label>
-            <input type="radio" name="ho4_choice" value="return" checked>
-            <div>
-                <strong>通常生還（あるいは反逆）</strong>
-                <span class="description">[HO2]を飼育せず、そのまま地上へ帰還した。（証拠があれば実父への反逆へ、なければ現状維持へ自動分岐）</span>
-            </div>
-        </label>
-        <label>
-            <input type="radio" name="ho4_choice" value="tame_ho2">
-            <div>
-                <strong>[HO2]の飼育・支配</strong>
-                <span class="description">[HO2]の過去の罪（遺体遺棄）を握り、彼を自分の新たな「忠実な道具（飼い犬）」として手元に置いて管理することを選んだ。</span>
-            </div>
-        </label>
-        <label>
-            <input type="radio" name="ho4_choice" value="dead">
-            <div>
-                <strong>ロスト</strong>
-                <span class="description">決断を下す前に、地下での激しい死闘やPC間の対立によって死亡・ロストした。</span>
-            </div>
-        </label>
+    <div class="section">
+        <h2>5. HO4（キング）の最終選択</h2>
+        <div class="radio-group">
+            <label>
+                <input type="radio" name="ho4_choice" value="return" checked>
+                <div>
+                    <strong>通常生還</strong>
+                    <span class="description">[HO2]を飼育せず、そのまま地上へ帰還した。（証拠の有無で実父への反逆か現状維持へ自動分岐）</span>
+                </div>
+            </label>
+            <label>
+                <input type="radio" name="ho4_choice" value="tame_ho2">
+                <div>
+                    <strong>[HO2]の飼育・支配</strong>
+                    <span class="description">[HO2]の過去の罪（遺体遺棄）を握り、彼を自分の新たな「忠実な道具（飼い犬）」として手元に置いて管理することを選んだ。</span>
+                </div>
+            </label>
+            <label>
+                <input type="radio" name="ho4_choice" value="dead">
+                <div>
+                    <strong>ロスト（死亡）</strong>
+                    <span class="description">決断を下す前に、地下での激しい死闘やPC間の対立によって死亡・ロストした。</span>
+                </div>
+            </label>
+        </div>
     </div>
-</div>
     
     <div class="section">
-        <h2>5. クライマックスの戦況・システムフラグ</h2>
+        <h2>6. クライマックスの戦況・システムフラグ</h2>
         <div class="checkbox-group">
             <label>
                 <input type="checkbox" id="status_myth" checked>
