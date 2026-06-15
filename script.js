@@ -1,159 +1,132 @@
-let currentEndingCode = 'A';
+const storyData = {
+    main: {
+        A: { title: "END A：箱庭の崩壊と、光差す夜明け", text: "特捜班の「答え」をスマホ越しに聞いた七瀬は、一瞬だけ息を呑み、獰猛で、しかし安堵したような声を上げた。\n\n七瀬游也「総監の首を確実に獲れる証拠か……！ ハッ、上等じゃねえか。よくやった特捜班。そのカードだけは、何が何でも死守して地上へ持ち帰れ！ これより俺の権限で、マスコミ各社へ『牧野鑑識課長および遠藤智也殺害事件の真相』と『九条総監への内部告発状』を同時に一斉リークする！ 事件の全貌をこの瞬間に公表して、上の隠蔽工作の退路を完全に断ってやるよ！」\n\nガチリ、と一方的に通話が切れる。直後、遠く地上の方向から、廃墟の静寂を切り裂くようにサイレンの音が響く。君たちはSDカードを握りしめ、地下の階段を確実に登り始める。地上へ出ると無数の赤色灯が埋め尽くしていた。君たちは堂々と突き進み、崩れゆく箱庭を後にした。\n\n長い、あまりにも長い闇だった。地平線の向こうから光が差し込み、君たちの影を長く地面に引いていく。その光は、あの『HoneyDew』の甘い蜜の香りも、地下の悍ましい記憶も、すべてを等しく洗い流していくようだった。" },
+        B: { title: "END B：完璧なアシンメトリー", text: "七瀬の問いをのらりくらりと躱し、通話をきる。地下室には再び、耳が痛くなるほどの静寂が戻る。[HO3]は血に濡れた画面を消し、「SDカード」を冷たい泥濘の底へと迷いなく滑り落とした。\n\n時刻は21時。まもなく別班が踏み込んでくるだろう。だがその前に、[HO3]は医療用メスを正確に構え直した。これより、彼自身の「左右対称の芸術」の時間が始まる。特捜班という名の歪な美しい駒たちは、[HO3]の手によって、頭頂部から正中線に沿って会陰部まで、寸分の狂いもなく『完全な左右対称』に切り刻まれていく。\n\nそれは、彼らに与えられた究極の救済であり、最高傑作のアートだった。[HO3]は満足げに微笑み、返り血を拭うと、静かに崩れゆく箱庭を後にすることだろう。" },
+        C: { title: "END C：箱庭に注がれた甘美な蜜", text: "静まり返った地下室。そこには、圧倒的な暴力を前に力尽き、物言わぬ骸となった特捜班の姿があった。真実も命も何一つ持ち帰られることはなく、すべては『アブホースの落とし子』へと呑み込まれていった。\n\n時刻は21時。地下室の重い鉄扉が開く。階段を降りてきたのは警視総監・九条院司、そして隣で優雅に微笑むマスター、雨宮千歳だった。" },
+        D: { title: "END D：終わらない箱庭", text: "七瀬との通話を終え、スマートフォンは沈黙する。地下室には再び静寂が戻る。九条院司を終わらせる光など、この箱庭には最初から届かなかったのか。手元にあった「SDカード」は冷たい泥濘の底へと滑り落ち、二度と日の目を浴びることはない。\n\n凄惨な夜だった。廃病院から這い出してきた特捜班の姿は、あまりにもボロボロでバラバラだった。完璧に整えられたこの闇は、あの『HoneyDew』の甘い蜜の香りとともに、地下の悍ましい記憶を等しく包み込んでいくようだった。事件は九条院司の手によって完璧に隠蔽され、特捜班という臨時の箱庭は、歪にねじ切られて幕を閉じる。" }
+    },
+    ho: {
+        ho1: {
+            "1": {s: "生還",text: "貴方たちが七瀬に託した「真実」は、巨大な権力を揺るがす光となりました。\n警察組織の闇が暴かれ、結色を殺した構造が根底から崩れ去ります。\n朝日に照らされる貴方の脳裏に、あの頃と変わらない結色の笑顔がよみがえります。\n「もう、大丈夫だよ」……貴方の復讐の炎は静かに消え、誇り高き刑事としての日常が戻ってきます。" },
+            "2": { s: "生還", text: "復讐を終えたその感触は、驚くほど軽やかなものでした。\n結色を奪った仇の骸を見下ろし、貴方はついに7年越しの悲願を果たした。\nしかし、返り血に染まった手を見つめ、貴方は悟ります。\n自分もまた、あの日結色を切り裂いた怪物と同類になったのだと。" },
+            "3": { s: "生還", text: "「仇は討った」。 \n事件の幕は降ろされ、真犯人とされる者は鉄格子の向こうへと消えていった。\n世間は警察の勝利を称え、貴方の7年越しの復讐も、公には完遂されたことになっています。\nしかし、貴方の心に灯っていた炎は、温もりを残さぬまま、不気味な「歪み」を孕んでくすぶり続けている。\n結色を奪った歪んだ美学と、真犯人の特徴――そのわずかなズレが、拭いきれない違和感となって、貴方の心にじわじわと侵食してくる。\n隣で微笑む[HO3]の真っ直ぐな瞳を、貴方は今も結色の面影と共に守り続けています。\nそのことに安堵しながらも、貴方は時折、深い闇に目を凝らさずにはいられません。" },
+            "4": { s: "継続不可", text: "「犯人はお前だ」。\n冷たい鉄格子の向こうで、貴方は自分の名前が猟奇殺人犯として報じられるのを聞いた。 結色の仇を討つはずだった手には、今や不名誉な手錠だけが光っている。\nかつての仲間も組織も貴方を切り捨て、貴方は真犯人の嘲笑を背中に感じながら、永遠の泥に沈んでいくことになってしまった。" },
+            "5": { s: "行方不明", text: "光はもう届くことはない。\n貴方は[HO4]の手によって、公には「殉職」したものとして処理されてしまった。\n地下室よりも暗い、[HO4]だけが知る密室で、貴方は「壊れた玩具」として生かされている。\n復讐を誓ったその腕は重い鎖に繋がれ、貴方は時折、結色の遺体の「完璧な対称性」を思い出し、安堵に近い絶望に浸り続けることになるだろう。" },
+            "6": { s: "ロスト", text: "（肉体的ロストにより、描写ナシ）" }
+        },
+        ho2: {
+            "1": { s: "生還", text: "貴方は自らの罪を告白した。\n7年前、凄惨な現場で血の海を掃除したあの夜のこと。\nそして、組織の闇を。\n七瀬の温かい手が、震える貴方の肩に置かれる。\n法による裁きは免れないでしょう。" },
+            "2": { s: "生還", text: "「私は、ただの雑巾ですから」。 貴方は自らの信念のために、すべての罪を被る道を選びました。\nかつて九条院司に与えられた「役割」を果たす。\n鉄格子の向こうへ消えていく貴方の横顔には、絶望ではなく、道具としての本望を遂げた恍惚とした微笑みが浮かんでいることでしょう。" },
+            "3": { s: "生還", text: "嵐は過ぎ去り、表面上の平穏が戻ってきました。\nしかし、貴方の首にかけられた鎖が外れることはありません。\n九条院司という絶対的な「神」が盤上から消え去ったとしても、貴方は依然として[HO4]の忠実な手足であり、代えのきく便利な『安物』のままです。\n深夜の呼び出し、命を顧みない過酷な任務、そして[HO4]からの冷徹な罵倒。\nそれこそが、貴方の渇望を潤す唯一の『蜜』であり、罪深き自分を繋ぎ止めるための刑罰なのです。\n「日常」という名の終わりのない使役の中で、貴方は今日も空っぽの瞳で、主人の命令を待ち続けます。\n道具としての本望を遂げ、いつか無残に使い潰されるその日まで、この幸福な支配は続いていくのです。 " },
+            "4": { s: "継続不可", text: "7年前、貴方はゴミを捨てました。\n今度は、貴方がゴミとして捨てられる番です。\n貴方はかつての栗田陸のように、組織の不祥事をすべて背負わされ、冷たい監獄へと送られた。\nですが、その横顔に悲しみはないことでしょう。\n誰かの役に立ち、無惨に使い潰されること。\nその「道具」としての役割を完遂し、貴方は満足げに微笑んで、社会から消滅していくのです。 " },
+            "5": { s: "行方不明", text: "意識は遠い海の底に沈み、思考の欠片さえも形を成しません。\nですが、[HO3]の粘りつくような視線だけは本能的に感じ取れることでしょう。\n貴方は「雑巾」ではなく「傑作」として、[HO3]の箱庭に迎え入れられました。\n狂信的な慈愛に満ちた檻の中で、貴方は新たな支配の輝きに跪き、永遠に飾られ続ける悦びに浸ることになるでしょう。" },
+            "6": { s: "行方不明", text: "「壊れた安物」。\nその言葉が、今の貴方にとって唯一の救いでした。\n[HO4]の私的な檻の中で、貴方は名前も意志も奪われ、ただの「モノ」として飼育されています。\n蹂躙される痛みだけが、自分がここに存在することを証明する唯一の感触。\nこれこそが、貴方が心の底から求めていた究極の「罰」だったのでしょう。" },
+            "7": { s: "生還", text: "貴方は自らの手で、その首にかけ続けていた見えない首輪を外しました。\n「雑巾」という立場を捨て、泥にまみれた罪を抱えたまま、一人の人間として歩むことを決めたのです。\n支配に身を委ねる安らかな日々は、もう二度と訪れることはないでしょう。\nこれからは自らの意志で悩み、選び、そして傷つかなければなりません。\nですが、その耐えがたい「自由」の重みこそが、貴方が人間へと戻った何よりの証です。 霧が晴れたその先で、貴方は初めて自分自身の足で、明日へと続く一歩を踏み出しました。" },
+            "8": { s: "ロスト", text: "（肉体的ロストにより、描写ナシ）" }
+        },
+        ho3: {
+            "1": { s: "生還", text: "「正義の味方」としての貴方は生き続ける。\n指先にはまだ牧野の臓器を切り裂いた時の滑らかな感触が残っているが、貴方の顔は世界で最も「正しく整った」仮面で覆われています。\n父の期待に応え、盤上の不純なノイズを掃除したという全能感。\n次は誰を、私の芸術の一部にしてあげようか。\n日常の裏側で刃を研ぎ澄ます完璧な貴方の物語は、きっと終焉を迎えることなどないでしょう。" },
+            "2": { s: "生還", text: "盤面は、貴方の望み通りに整いました。\n愚かな駒たちに罪を着せ、貴方は「運命の証」である[HO2]を、誰にも見つからない貴方の聖域へと連れこみます。\nそこで貴方は、壊れた[HO2]を自分の美学で塗り潰し、永遠に飾るのか。\n二人だけの完璧なシンメトリー。\nそこにはもう、不純なノイズは一切存在しません。\n貴方は「影」であることをやめ、自らの箱庭を統べる真の王となるのでしょう。" },
+            "3": { s: "継続不可", text: "これもまた、一つの対称性かもしれません。\n7年前、貴方が栗田陸に強いた絶望を、今度は貴方自身が味わう番です。\n自首という形で自らを「悪」として差し出すその姿は、あまりにも美しく、そして歪んでいました。\n鉄格子の影が描く縞模様の中で、貴方は自分という「作品」を完成させ、陶酔のなかで眠りにつくことでしょう。" },
+            "4": { s: "ロスト", text: "芸術は、未完成のまま幕を閉じる。\n復讐に燃える[HO1]の手が、貴方に最後を告げる。\n崩れ去る意識の中で、貴方は自分が作り上げた「左右対称の作品」たちが、暗闇から貴方を冷たく笑っているような声を聴く。\n返り血に染まった地下室で、貴方の美学は泥にまみれ、永遠に失われた。" },
+            "5": { s: "ロスト", text: "（肉体的ロストにより、描写ナシ）" }
+        },
+        ho4: {
+            "1": { s: "生還", text: "「チェックメイト」。\nすべて貴方の描いた筋書き通り、盤上の駒は完璧に配置された。\n忌々しき父・九条院司を玉座から引きずり落とし、その絶対的な支配権を完全に簒奪(さんだつ)する。\n貴方の悪意によって心を粉々にへし折られ、廃人となった[HO1]。\n貴方の足元で、従順に尽くす[HO2]。\nそして、哀れなピエロとして鉄格子の向こうへ送られた[HO3]。\nかつて父が支配していたドス黒い警察組織の頂点に、今度は貴方が「新たなキング」として君臨するその日も次期に訪れることでしょう。" },
+            "2": { s: "生還", text: "実父である九条院司の失脚、[HO1]の精神崩壊、そして忠実な奴隷たる[HO2]。\nゲームは貴方の圧倒的な勝利で幕を閉じる。\nただ一つ、この完璧なチェス盤において未解決のまま残されたのは、あの猟奇殺人の真犯人が一体誰だったのか、ついにその正体にすらたどり着けなかったということ。\nしかし、貴方の心にあるのは焦燥でも敗北感でもありません。\n貴方にとってあの猟奇殺人など、実父を玉座から引きずり落とし、邪魔な駒を蹂躙するための都合のいい舞台装置に過ぎなかったのだから。" },
+            "3": { s: "生還", text: "九条院司の失脚。\n貴方の切望は果たされ、父の帝国は崩壊した。\nしかし、ふと見渡したチェス盤の上には、もう誰も残っていない。\n心を折るはずだった[HO1]も、便利な道具だった[HO2]も、猟奇の怪物だった[HO3]も、すべては泥をすすって無残に砕け散った。\n静まり返った玉座で、貴方は手に入れた絶対的な権力、勝利の果実――それは驚くほどに無味乾燥で、退屈なもの。\n誰もいない盤面、砕けた駒の破片が貴方の瞳には映っていた。" },
+            "4": { s: "継続不可", text: "「チェックメイト」。 \nその冷酷な宣告を突きつけられたのは、他ならぬ貴方自身でした。\n父・九条院司の牙城(がじょう)は崩せず、あろうことか[HO3]たちの策略によって、貴方がすべての猟奇殺人の泥を背負わされることになった。\n冷たい鉄格子の向こう、自由を奪われた手。\nしかし、貴方の瞳から傲慢な光が消えることはないだろう。\n敗北の屈辱にまみれながらも、貴方の脳裏ではすでに、この最悪の盤面をどうひっくり返すかの計算が始まっている。\n暗闇の中、低く響く貴方の笑い声は、終わりなき悪意の逆襲を告げていた。" },
+            "5": { s: "生還", text: "「壊れた安物」。\nそれが、貴方が目の前の玩具に与えた新しい名前。\n意志も、言葉も、尊厳もすべてを剥ぎ取り、貴方の私的な檻の中に閉じ込めた[HO2]。\nかつて九条院司の道具だったそれは、今や完全に貴方だけの「モノ」となった。\n貴方が与える蹂躙と痛みだけを栄養にして、ただ生かされている哀れな存在。\nすっかり壊れて使い物にならなくなった安物を、明日はどう弄び、どう擦り切らせていこうか。" },
+            "6": { s: "生還", text: "「チェックメイト」。そして、ゲームセット。 \n盤上から取り除かれた二つの美しい駒は、今や貴方個人の檻の中に並んで収まっている。\nかつては牙を剥き、復讐の炎を燃やしていたはずの[HO1]。\nかつては誰かの道具として、必死に自分の存在価値を探していた[HO2]。\n誇り高きルークの折れた心を、従順なナイトの擦り切れた肉体を、今日はどう並べ、どう弄び、どう歪ませていくのだろうか。" },
+            "7": { s: "ロスト", text: "（肉体的ロストにより、描写ナシ）" }
+        }
+    }
+};
 
-function evaluateEnding() {
-    const caseEnd = document.querySelector('input[name="case_end"]:checked').value;
-    const ho1Status = document.querySelector('input[name="ho1_status"]:checked').value;
-    const ho2Status = document.querySelector('input[name="ho2_status"]:checked').value;
-    const ho3Status = document.querySelector('input[name="ho3_status"]:checked').value;
-    const ho4Choice = document.querySelector('input[name="ho4_choice"]:checked').value;
+document.getElementById('generateBtn').addEventListener('click', function() {
+    const mainKey = document.getElementById('sel_main').value;
+    if (mainKey === "none") { alert("全体ENDを選択してください。"); return; }
     
-    const statusMyth = document.getElementById('status_myth').checked;
-    const statusEvidence = document.getElementById('status_evidence').checked;
-    
-    const ho1Alive = (ho1Status !== 'dead');
-    const ho2Alive = (ho2Status !== 'dead');
-    const ho3Alive = (ho3Status !== 'dead');
-    const ho4Alive = (ho4Choice !== 'dead');
+    const names = {
+        "[HO1]": document.getElementById('name_ho1').value || "HO1",
+        "[HO2]": document.getElementById('name_ho2').value || "HO2",
+        "[HO3]": document.getElementById('name_ho3').value || "HO3",
+        "[HO4]": document.getElementById('name_ho4').value || "HO4"
+    };
 
-    const resultBox = document.getElementById('resultBox');
-    const resultName = document.getElementById('resultName');
+    const replaceNames = (text) => {
+        let res = text;
+        for (const [tag, name] of Object.entries(names)) {
+            res = res.split(tag).join(`<span class="highlight">${name}</span>`);
+        }
+        return res;
+    };
 
-    resultBox.className = 'result-area';
+    let html = `<div class="desc-text"><strong>${storyData.main[mainKey].title}</strong>\n\n${replaceNames(storyData.main[mainKey].text)}</div>`;
 
-    // ====================================================
-    // 1. 【END C：泥濘に沈む真実】
-    // ====================================================
-    // 神話生物の未撃破、またはSDカード不所持、または特捜班が全員死亡の場合
-    if (!statusMyth || !statusEvidence || (!ho1Alive && !ho2Alive && !ho3Alive && !ho4Alive)) {
-        resultBox.classList.add('end-C');
-        resultName.innerText = '【END C：泥濘に沈む真実】へ分岐';
-        currentEndingCode = 'C';
-        return;
-    }
+    const summaryResults = [];
 
-    // ====================================================
-    // 2. 【END H：蜜に群がる羽虫たち】
-    // ====================================================
-    // 特捜班が全員生存（または主要PC生存）で、全体結末として「事件の隠蔽（蜜への屈服）」を選択した場合
-    if (caseEnd === 'bury_end' && ho1Status === 'alive_justice') {
-        resultBox.classList.add('end-H');
-        resultName.innerText = '【END H：蜜に群がる羽虫たち】へ分岐';
-        currentEndingCode = 'H';
-        return;
-    }
-
-    // ====================================================
-    // 3. 【END B：完全なるシンメトリー】
-    // ====================================================
-    // HO3が一人勝ち（逃亡）した、あるいは他PCが全員死亡してHO3だけが生存している場合
-    if (ho3Status === 'win' || (!ho1Alive && !ho2Alive && !ho4Alive && ho3Alive)) {
-        resultBox.classList.add('end-B');
-        resultName.innerText = '【END B：完璧なアシンメトリー】へ分岐';
-        currentEndingCode = 'B';
-        return;
-    }
-
-    // ====================================================
-    // 4. 【END G：完璧なる駒の叛逆】
-    // ====================================================
-    // HO1、HO2、HO3が全員ロストし、HO4一人のみが孤高の生還を果たした場合
-    if (!ho1Alive && !ho2Alive && !ho3Alive && ho4Alive) {
-        resultBox.classList.add('end-G');
-        resultName.innerText = '【END G：完璧なる駒の叛逆】へ分岐';
-        currentEndingCode = 'G';
-        return;
-    }
-
-    // ====================================================
-    // 5. 【END E：楽園の檻】
-    // ====================================================
-    // HO1が「執着と狂気（HO3の守護・監禁）」を選択し、かつHO3が生存（身柄拘束/監禁）している場合
-    if (ho1Status === 'alive_obsess' && ho3Status === 'arrest') {
-        resultBox.classList.add('end-E');
-        resultName.innerText = '【END E：楽園の檻】へ分岐';
-        currentEndingCode = 'E';
-        return;
-    }
-
-    // ====================================================
-    // 6. 【END F：身代わりの洗礼】
-    // ====================================================
-    // 全体の結末として「冤罪の幕引き」が選ばれた、またはHO2に罪が擦り付けられた場合
-    if (caseEnd === 'scapegoat_end' || ho2Status === 'scapegoat') {
-        resultBox.classList.add('end-F');
-        resultName.innerText = '【END F：身代わりの洗礼】へ分岐';
-        currentEndingCode = 'F';
-        return;
-    }
-
-    // ====================================================
-    // 7. 【END D：復讐の連鎖】
-    // ====================================================
-    // HO1のステータスが明確に「復讐の完遂（殺害意図をもって引き金を引いた）」である場合のみDへ
-    if (ho1Status === 'alive_revenge') {
-        resultBox.classList.add('end-D');
-        resultName.innerText = '【END D：復讐の連鎖】へ分岐';
-        currentEndingCode = 'D';
-        return;
-    }
-
-    // ====================================================
-    // 8. 【END A：箱庭の崩壊と、光差す夜明け】
-    // ====================================================
-    // 条件クリア：アブホース撃破・SDあり・HO3の逮捕・HO1が理性を保ち（正義の執行）・HO2自白・HO4通常生還
-    if (caseEnd === 'ho3_arrest' && ho1Status === 'alive_justice' && ho2Status === 'confess' && ho4Choice === 'return') {
-        resultBox.classList.add('end-A');
-        resultName.innerText = '【END A：箱庭の崩壊と、光差す夜明け】へ分岐';
-        currentEndingCode = 'A';
-        return;
-    }
-
-    // 激闘によるHO3の死亡ロストなど、通常のハッピー条件から外れた戦闘終了パターンは
-    // すべて大元であるグッドエンド【END A】へ着地（HO3死亡時のアナウンス等はGMがアドリブで対応可能）
-    resultBox.classList.add('end-A');
-    resultName.innerText = '【END A：箱庭の崩壊と、光差す夜明け】へ分岐';
-    currentEndingCode = 'A';
-}
-
-function generateStoryEnding() {
-    const p1 = document.getElementById('name_ho1').value || 'HO1';
-    const p2 = document.getElementById('name_ho2').value || 'HO2';
-    const p3 = document.getElementById('name_ho3').value || 'HO3';
-    const p4 = document.getElementById('name_ho4').value || 'HO4';
-
-    const storyArea = document.getElementById('storyArea');
-    const storyOutput = document.getElementById('storyOutput');
-
-    const filePath = `./endings/end_${currentEndingCode}.html`;
-
-    fetch(filePath)
-        .then(response => {
-            if (!response.ok) throw new Error('ファイルの読み込みに失敗しました');
-            return response.text();
-        })
-        .then(htmlText => {
-            let formattedText = htmlText
-                .replace(/\[HO1\]/g, p1)
-                .replace(/\[HO2\]/g, p2)
-                .replace(/\[HO3\]/g, p3)
-                .replace(/\[HO4\]/g, p4);
-
-            storyOutput.innerHTML = formattedText;
-            storyArea.style.display = 'block';
-            storyArea.scrollIntoView({ behavior: 'smooth' });
-        })
-        .catch(error => {
-            console.error(error);
-            storyOutput.innerHTML = `
-                <div style="font-weight: bold; font-size: 18px; color: #e74c3c; margin-bottom: 15px;">確定結末コード: 【END ${currentEndingCode}】</div>
-                <p>endingsフォルダ内の [end_${currentEndingCode}.html] を出力します。</p>`;
-            storyArea.style.display = 'block';
-            storyArea.scrollIntoView({ behavior: 'smooth' });
+    if (mainKey !== 'C') {
+        const hos = ["ho1", "ho2", "ho3", "ho4"];
+        const hoLabels = ["HO1：復讐", "HO2：被虐", "HO3：正義", "HO4：加虐"];
+        
+        hos.forEach((ho, i) => {
+            const val = document.getElementById(`sel_${ho}`).value;
+            if (val !== "none" && storyData.ho[ho][val]) {
+                const item = storyData.ho[ho][val];
+                summaryResults.push({ ho: `HO${i+1}`, code: `${mainKey}-${val}`, status: item.s });
+                html += `<div class="ho-box"><span class="ho-tag">${hoLabels[i]}</span><div class="desc-text">${replaceNames(item.text)}</div></div>`;
+            }
         });
-}
+        html += `<div class="desc-text">しかし、君たちが命を賭して掴み取ったこの光は、二度と組織の闇に揉み消されることはない。冷たいコンクリートの隙間から、新しい正義の芽が息吹く（いぶく）のを感じながら、君たちは新しい一歩を踏み出した。</div>`;
+    } else {
+        ["HO1", "HO2", "HO3", "HO4"].forEach(h => summaryResults.push({ ho: h, code: "C", status: "ロスト" }));
+    }
 
-document.querySelectorAll('input[type="radio"], input[type="checkbox"]').forEach(input => {
-    input.addEventListener('change', evaluateEnding);
+    // Bar HoneyDew エピローグ描写
+    html += `<div class="honeydew-area">`;
+    html += `<div class="desc-text">――エピローグ：Bar HoneyDew――\n\nジャズの流れる、薄暗く落ち着いた『Bar HoneyDew』の店内。いつもと変わらない、静かで美しい闇。\n\nカウンターの奥では、20代そこそこにしか見えない若々しいマスターが、穏やかな微笑みを浮かべながら、手元のグラスを丁寧に、丁寧に磨き上げている。\n\n${getHoneydewFullScript(mainKey, names)}\n\n――Call of Cthulhu『箱庭に注がれた甘美な蜜』 \nこれにて、幕引き。</div>`;
+    html += `</div>`;
+
+    // 通過報告用まとめ
+    let statusCounts = { "生還": 0, "ロスト": 0, "行方不明": 0, "継続不可": 0 };
+    let summaryHtml = `<div class="report-summary">`;
+    summaryResults.forEach(r => {
+        summaryHtml += `<span class="report-line">${r.ho}【END ${r.code}】</span>`;
+        statusCounts[r.status]++;
+    });
+    
+    // 0の場合は表示しない集計行
+    const statusOrder = ["生還", "ロスト", "行方不明", "継続不可"];
+    const activeStats = statusOrder
+        .map(s => statusCounts[s] > 0 ? `${statusCounts[s]}${s}` : null)
+        .filter(v => v !== null);
+    
+    summaryHtml += `<span class="total-status">${activeStats.join(" ")}</span>`;
+    summaryHtml += `</div>`;
+    
+    html += summaryHtml;
+
+    const out = document.getElementById('output');
+    out.innerHTML = html;
+    out.style.display = "block";
+    window.scrollTo({ top: out.offsetTop, behavior: 'smooth' });
 });
 
-evaluateEnding();
+function getHoneydewFullScript(key, names) {
+    if (key === 'A') {
+        return `テレビのニュースからは、元警視総監・九条院司の公判や一連の事件の進展を伝えるアナウンサーの声が虚しく流れているが、マスターはそれに目もくれない。\n\nマスターはふとニュースの音声を消し、誰もいない空間に向けて、酷く甘く美しい声で独りごちる。\n\n<span class="speaker">雨宮千歳</span>「あーあ……。九条様も、あんなに熱心なプレイヤーだったのに。盤面ごとひっくり返されてしまうなんて、不甲斐ない。\nせっかく育てた『可愛い番犬』を、あの野良犬どもに噛み殺させてしまうなんてね……」\n\n彼は磨いていたグラスを静かに置く。そのグラスに血のようにどろりとした、怪しい輝きを放つ赤色の液体（『甘美な蜜』が混ぜられたカクテル）を注ぐ。\n\n<span class="speaker">雨宮千歳</span>「これでお手製の『蜜』もしばらくは在庫限り、ですか。\n……まあ、いいでしょう。\n一つ壊れたところで私の箱庭が濁るわけではありません。\n蜜を欲する犬どもはいくらでも代わりが効きますからね」\n\nマスターは、かつて九条院司が座っていた特等席の椅子を見つめ、三日月のような歪んだ笑顔を浮かべる。\n\n<span class="speaker">雨宮千歳</span>「さて……。次の王は、どなたに就いていただきましょうか？\n……ふふ、ふふふふ……」`;
+    } else if (key === 'B') {
+        return `テレビのニュースからは、特捜班の凄惨な相撃ち事故のニュースが虚しく流れているが、マスターはそれに目もくれない。\n\n重い防音扉が開き、一人の警察官が静かに店内に足を踏み入れた。指先には、硬質で甘い鉄の匂いが微かに染み付いている。それをみたマスターは、いつも通り三日月のような歪んだ笑顔を浮かべ、真紅のカクテルを静かに差し出した。\n\n<span class="speaker">雨宮千歳</span>「あーあ……。せっかく育てた『可愛い番犬』を、あの野良犬どもに噛み殺させてしまうなんてね……。\nお手製の『蜜』もしばらくは在庫限り、ですか。……まあ、いいでしょう。\n一つ壊れたところで、私の箱庭が濁るわけではありません。\nあの箱庭には、父親を遥かに超える、美しく冷酷な『最高傑作』が生き残ったのですから」\n\nマスターは、かつて九条院司が座っていた椅子を指差し、真の王を歓迎するように目を細める。\n\n<span class="speaker">雨宮千歳</span>「さて……。次の王は、貴方に就いていただきましょうか？\nふふ、おめでとうございます、<span class="highlight">${names["[HO3]"]}</span>様。\nこれからは貴方の美学で、新しい箱庭を整えていきましょう。父を継げる最高傑作は貴方なのですから。\nふふ、ふふふふ……」`;
+    } else if (key === 'C') {
+        return `テレビのニュースからは、一連の事件が「容疑者死亡により捜査終結」したこと、そして特捜班の面々が「不慮の事故」で殉職したことを伝えるアナウンサーの声が流れているが、マスターはそれに目もくれない。\n\nカウンターの奥には、警視総監・九条院司が冷たい眼差しで座っていた。\n\n<span class="speaker">九条院司</span>「私の最高傑作として完璧な駒に育て上げたと思っていたが……所詮はこの程度の器に過ぎんかったというわけか」\n\n<span class="speaker">雨宮千歳</span>「おや、冷たいですねえ。ですがご覧の通り。不甲斐ない野良犬どもでしたが、我が子の良い『餌』にはなってくれたようです。見てください、特捜班の肉体をたっぷり喰ったおかげで……これほど極上の『甘美な蜜』が滴っている」\n\n九条院司は満足げに目を細め、その蜜を容器へと回収していく。特捜班という邪魔な駒を処理し、さらなる至高の蜜を手に入れた。九条の帝国はこれからもビクともせず維持され続けるのだ。\n\n<span class="speaker">雨宮千歳</span>「さて……。次の王は、どなたに就いていただきましょうか？ ……ふふ、ふふふふ……」`;
+    } else {
+        return `テレビのニュースからは、特捜班の不祥事や悲惨な共倒れ事故を伝えるアナウンサーの声が流れているが、マスターはそれに目もくれない。\n\nマスターはふとニュースの音声を消し、誰もいない空間に向けて独りごちる。彼は磨いていたグラスを静かに置き、血のようにどろりとした赤色の液体を注ぐ。\n\n<span class="speaker">雨宮千歳</span>「あーあ……。せっかく熱心なプレイヤーたちが揃っていたのに。お互いに噛み殺し合って、盤面をめちゃくちゃにしてしまうなんて不甲斐ない。まあいいでしょう。一つ玩具が壊れたところで、私の箱庭が濁るわけではありません。首輪を欲する犬どもはいくらでも代わりが効きますからね」\n\nマスターは三日月のような歪んだ笑顔を浮かべる。\n\n<span class="speaker">雨宮千歳</span>「さて……。次の王は、どなたに就いていただきましょうか？ ……ふふ、ふふふふ……」`;
+    }
+}
+
+function setTheme(theme) {
+    document.body.className = theme;
+    document.querySelectorAll('.t-btn').forEach(b => b.classList.remove('active'));
+    document.querySelector(`.t-btn.${theme.split('-')[2]}`).classList.add('active');
+}
