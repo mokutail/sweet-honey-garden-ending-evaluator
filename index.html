@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>『箱庭に注がれた甘美な蜜』完全版エンド生成ツール</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="theme-sepia">
+
+    <!-- スタイリッシュなテーマ切り替え -->
+    <div class="theme-nav">
+        <div class="theme-options">
+            <button class="t-btn white" onclick="setTheme('theme-white')" title="White Mode"></button>
+            <button class="t-btn sepia active" onclick="setTheme('theme-sepia')" title="Paper Mode"></button>
+            <button class="t-btn dark" onclick="setTheme('theme-dark')" title="Dark Mode"></button>
+        </div>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1>箱庭に注がれた甘美な蜜</h1>
+            <p class="subtitle">Complete Narrative Logic Script</p>
+        </header>
+
+        <!-- ① 名前入力 -->
+        <div class="section shadow-box">
+            <label class="ui-label">① 探索者（PC）の名前を入力</label>
+            <div class="grid">
+                <div class="form-group"><label>HO1 (復讐):</label><input type="text" id="name_ho1" placeholder="HO1名"></div>
+                <div class="form-group"><label>HO2 (被虐):</label><input type="text" id="name_ho2" placeholder="HO2名"></div>
+                <div class="form-group"><label>HO3 (正義):</label><input type="text" id="name_ho3" placeholder="HO3名"></div>
+                <div class="form-group"><label>HO4 (加虐):</label><input type="text" id="name_ho4" placeholder="HO4名"></div>
+            </div>
+        </div>
+
+        <!-- ② 全体END -->
+        <div class="section shadow-box">
+            <label class="ui-label">② 全体END分岐を選択</label>
+            <select id="sel_main">
+                <option value="none">-- 選択してください --</option>
+                <option value="A">【END A：箱庭の崩壊と、光差す夜明け】 アブホース撃破・SDカード提出・告発</option>
+                <option value="B">【END B：完璧なアシンメトリー】 アブホース撃破・HO3ソロ生還・「完璧な左右対称」を選択</option>
+                <option value="C">【END C：箱庭に注がれた甘美な蜜】 アブホースに敗北</option>
+                <option value="D">【END D：終わらない箱庭】 A~Cに当てはまらない（証拠未提出・共倒れ等）</option>
+            </select>
+        </div>
+
+        <!-- ③ 個別HO -->
+        <div class="section shadow-box">
+            <label class="ui-label">③ 各HOの状況（プルダウン）</label>
+            <div class="grid">
+                <div class="form-group">
+                    <label>HO1:</label>
+                    <select id="sel_ho1">
+                        <option value="none">-- 未選択 --</option>
+                        <option value="1">【END 1】SDカード回収・七瀬にHO3の罪を告発した</option>
+                        <option value="2">【END 2】HO3を真犯人と確信し、自らの手で殺害した</option>
+                        <option value="3">【END 3】事件解決したがHO3以外を真犯人として処理した</option>
+                        <option value="4">【END 4】真犯人を特定できず、自分が犯人に仕立てられた</option>
+                        <option value="5">【END 5】発狂中、HO4に私的に監禁・飼育された</option>
+                        <option value="6">【END 6】肉体的にロストした</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>HO2:</label>
+                    <select id="sel_ho2">
+                        <option value="none">-- 未選択 --</option>
+                        <option value="1">【END 1】全罪を自白、SDカードを七瀬に託して生還</option>
+                        <option value="2">【END 2】HO3をかばい、真犯人として自ら進み出た</option>
+                        <option value="3">【END 3】罪を秘匿したまま日常へ生還した</option>
+                        <option value="4">【END 4】組織の不祥事を背負わされ、冷たい監獄へ送られた</option>
+                        <option value="5">【END 5】発狂中、HO3に私的に監禁・飼育された</option>
+                        <option value="6">【END 6】発狂中、HO4に私的に監禁・飼育された</option>
+                        <option value="7">【END 7】HO4の道具をやめ、人として生きる選択をした</option>
+                        <option value="8">【END 8】肉体的にロストした</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>HO3:</label>
+                    <select id="sel_ho3">
+                        <option value="none">-- 未選択 --</option>
+                        <option value="1">【END 1】罪のなすりつけに成功、刑事の日常へ生還</option>
+                        <option value="2">【END 2】なすりつけに成功、HO2を連れ去り監禁した</option>
+                        <option value="3">【END 3】自首を選択した</option>
+                        <option value="4">【END 4】正体を暴かれ、HO1によって殺害された</option>
+                        <option value="5">【END 5】肉体的にロストした</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>HO4:</label>
+                    <select id="sel_ho4">
+                        <option value="none">-- 未選択 --</option>
+                        <option value="1">【END 1】父失脚・HO1発狂・HO2保持・HO3逮捕成功</option>
+                        <option value="2">【END 2】父失脚・HO1発狂・HO2保持・HO3逮捕できず</option>
+                        <option value="3">【END 3】父失脚したが部下(1-3)が全員死亡した</option>
+                        <option value="4">【END 4】父の告発失敗、自分が犯人に仕立てられた</option>
+                        <option value="5">【END 5】発狂したHO2を私的に監禁・飼育することを選んだ</option>
+                        <option value="6">【END 6】発狂したHO1・2を私的に監禁・飼育することを選んだ</option>
+                        <option value="7">【END 7】肉体的にロストした</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <button id="generateBtn">朗読スクリプトを生成する</button>
+
+        <div id="output"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
