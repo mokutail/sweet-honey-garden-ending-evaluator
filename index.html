@@ -38,10 +38,11 @@
             <label class="ui-label">② 全体END分岐を選択</label>
             <select id="sel_main">
                 <option value="none">-- 選択してください --</option>
-                <option value="A">アブホース撃破・SDカード提出・告発</option>
-                <option value="B">アブホース撃破・HO3ソロ生還・「完璧な左右対称」を選択</option>
-                <option value="C">アブホースに敗北</option>
-                <option value="D"> 上記に当てはまらない（証拠未提出・共倒れ等）</option>
+                <option value="A">アブホースの落とし子撃破・SDカード提出・告発</option>
+                <option value="B">アブホースの落とし子撃破・HO3ソロ生還・「完璧な左右対称」を選択</option>
+                <option value="C">アブホースの落とし子に敗北</option>
+                <option value="D">アブホースの落とし子からの逃亡</option>
+                <option value="E"> 上記に当てはまらない（証拠未提出・共倒れ等）</option>
             </select>
         </div>
 
@@ -53,7 +54,7 @@
                     <label>◇HO1</label>
                     <select id="sel_ho1">
                         <option value="none">-- 未選択 --</option>
-                        <option value="1">0.アブホースの落とし子からの逃亡</option>
+                        <option value="0">0.アブホースの落とし子からの逃亡</option>
                         <option value="1">1.SDカード回収・七瀬にHO3の罪を告発した</option>
                         <option value="2">2.HO3を真犯人と確信し、自らの手で殺害した</option>
                         <option value="3">3.事件解決したがHO3以外を真犯人として処理した</option>
@@ -66,7 +67,7 @@
                     <label>◇HO2</label>
                     <select id="sel_ho2">
                         <option value="none">-- 未選択 --</option>
-                        <option value="1">0.アブホースの落とし子からの逃亡</option>
+                        <option value="0">0.アブホースの落とし子からの逃亡</option>
                         <option value="1">1.全罪を自白、SDカードを七瀬に託して生還</option>
                         <option value="2">2.HO3をかばい、真犯人として自ら進み出た</option>
                         <option value="3">3.罪を秘匿したまま日常へ生還した</option>
@@ -81,7 +82,7 @@
                     <label>◇HO3</label>
                     <select id="sel_ho3">
                         <option value="none">-- 未選択 --</option>
-                        <option value="1">0.アブホースの落とし子からの逃亡</option>
+                        <option value="0">0.アブホースの落とし子からの逃亡</option>
                         <option value="1">1.罪のなすりつけに成功、刑事の日常へ生還</option>
                         <option value="2">2.なすりつけに成功、HO2を連れ去り監禁した</option>
                         <option value="3">3.自首を選択した</option>
@@ -93,7 +94,7 @@
                     <label>◇HO4</label>
                     <select id="sel_ho4">
                         <option value="none">-- 未選択 --</option>
-                        <option value="1">0.アブホースの落とし子からの逃亡</option>
+                        <option value="0">0.アブホースの落とし子からの逃亡</option>
                         <option value="1">1.父失脚・HO1発狂・HO2保持・HO3逮捕成功</option>
                         <option value="2">2.父失脚・HO1発狂・HO2保持・HO3逮捕できず</option>
                         <option value="3">3.父失脚したが部下(1-3)が全員死亡した</option>
