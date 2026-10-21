@@ -319,8 +319,38 @@ label.is-off:hover { background-color: transparent; }
     margin-bottom: 2px;
 }
 .ind-text { margin-top: 8px; }
-.report-line {
-    margin-top: 24px;
-    padding-top: 10px;
-    border-top: 1px solid var(--border-color);
+.report-box {
+    margin-top: 28px;
+    padding: 12px 14px;
+    background: #f8f9fb;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
 }
+.report-box-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-bottom: 8px;
+}
+.report-text {
+    font-size: 14px;
+    line-height: 1.8;
+    user-select: all;
+}
+.copy-btn {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 6px 16px;
+    font-size: 13px;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.copy-btn:hover { background-color: #34495e; }
+.copy-btn:disabled { opacity: 0.7; cursor: default; }

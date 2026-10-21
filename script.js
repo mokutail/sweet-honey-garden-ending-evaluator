@@ -389,14 +389,66 @@
                 break;
         }
 
-        // 通過報告用の表記
-        const report = HOS.map((n) => `${names[n]}：${endLabel(res.overall, n, res.ind[n])}`).join(' ／ ');
-        parts.push(`<div class="kp-note report-line">通過報告用：${escapeHtml(report)}</div>`);
+        // 通過報告用の表記（1人1行）
+        const report = buildReport(res, names);
+        parts.push(
+            '<div class="report-box">' +
+                '<div class="report-box-head"><span>通過報告用</span>' +
+                '<button type="button" class="copy-btn" id="copyReportBtn">コピー</button></div>' +
+                `<div class="report-text" id="reportText">${escapeHtml(report)}</div>` +
+            '</div>'
+        );
 
         $('storyOutput').innerHTML = parts.join('');
+        $('copyReportBtn').addEventListener('click', () => copyText(report, $('copyReportBtn')));
         const area = $('storyArea');
         area.style.display = 'block';
         area.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // ---------- 通過報告 ----------
+    // Q&Aの方針どおり、ENDタイトルは伏せ「生還／ロスト／行方不明」のみ添える
+    function reportStatus(n, r) {
+        if (r.code === null) return '生還';
+        const end = ENDING_DATA.individual[n].ends[r.code];
+        if (end && end.lost) return 'ロスト';
+        const missing = (n === 1 && r.code === 5) || (n === 2 && (r.code === 5 || r.code === 6));
+        return missing ? '行方不明' : '生還';
+    }
+
+    function buildReport(res, names) {
+        const lines = HOS.map((n) => {
+            const r = res.ind[n];
+            const code = r.code === null ? `【END ${res.overall}】` : `【END ${res.overall}-${r.code}】`;
+            const who = names[n] === `HO${n}` ? `HO${n}` : `HO${n} ${names[n]}`;
+            return `${who}：${code} ${reportStatus(n, r)}`;
+        });
+        return lines.join('\n');
+    }
+
+    function copyText(text, btn) {
+        const done = () => {
+            const prev = btn.textContent;
+            btn.textContent = 'コピーしました';
+            btn.disabled = true;
+            setTimeout(() => { btn.textContent = prev; btn.disabled = false; }, 1500);
+        };
+        const fallback = () => {
+            const ta = document.createElement('textarea');
+            ta.value = text;
+            ta.setAttribute('readonly', '');
+            ta.style.position = 'fixed';
+            ta.style.opacity = '0';
+            document.body.appendChild(ta);
+            ta.select();
+            try { document.execCommand('copy'); done(); } catch (e) { /* noop */ }
+            document.body.removeChild(ta);
+        };
+        if (navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(text).then(done, fallback);
+        } else {
+            fallback();
+        }
     }
 
     // ---------- 見出しなどの {HO*} を名前に差し替え ----------
