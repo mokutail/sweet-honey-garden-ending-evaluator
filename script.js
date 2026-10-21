@@ -196,7 +196,7 @@
         if (['HO2', 'HO4', 'mita'].includes(culprit)) return { code: 3 };
         if (culprit === 'HO3') return { code: 1, note: 'SDカード未提出のため厳密には条件外です。HO3の逮捕による決着としてEND 1を準用しています。' };
         if (inp.sd) return { code: 1, note: '犯人の報告がないため厳密には条件外です。SDカードによる告発としてEND 1を準用しています。' };
-        return { code: null, note: '犯人の報告もSDカードの提出もないため、本編に該当する個別ENDがありません。KP裁量で描写してください。' };
+        return { code: 3, note: '犯人の報告もSDカードの提出もないため厳密には条件外です。事件が曖昧なまま幕引きされた結末としてEND 3を準用しています。' };
     }
 
     // ---------- HO2 ----------
@@ -222,7 +222,7 @@
         if (c.isDead(3)) return { code: 5 };
         if (s[3] === 'escaped') return { code: 0 };
         if (s[3] === 'surrender') return { code: 3 };
-        if (c.ho3Arrested) return { code: null, note: '正体を暴かれて逮捕・拘束された場合の個別ENDは本編に定義されていません。KP裁量で描写してください。' };
+        if (c.ho3Arrested) return { code: 3, note: '正体を暴かれて逮捕された場合の専用ENDはないため、END 3を準用しています（冒頭の「自首という形で」は「逮捕という形で」と読み替えてください）。' };
         if (c.framingSuccess && c.ho2CagedBy === 'HO3') return { code: 2 };
         if (c.framingSuccess) return { code: 1 };
         return { code: 1, note: '罪の擦り付けは成立していませんが、正体を暴かれないまま生還したためEND 1を準用しています。' };
@@ -243,7 +243,7 @@
             && !inp.ho2Confess && (inp.ho2Broken || inp.ho2Choice === 'A');
         const ho3Caught = c.ho3Arrested || s[3] === 'surrender';
         if (ho1Insane && ho2Kept) return { code: ho3Caught ? 1 : 2 };
-        return { code: null, note: '父の失脚には成功しましたが、END 1〜3の条件（HO1の発狂・HO2を道具として保持 など）を満たしていません。本編に該当する個別ENDがないため、KP裁量で描写してください。' };
+        return { code: ho3Caught ? 1 : 2, note: '父の失脚には成功しましたが、HO1の発狂・HO2の保持などの条件は満たしていません。' + (ho3Caught ? 'HO3を逮捕できたためEND 1' : 'HO3を逮捕できなかったためEND 2') + 'を準用しています（満たしていない駒についての一文は省いて読み上げてください）。' };
     }
 
     // =========================================================
@@ -407,18 +407,20 @@
     }
 
     // ---------- 通過報告 ----------
-    // Q&Aの方針どおり、ENDタイトルは伏せ「生還／ロスト／行方不明」のみ添える
+    // 通過報告での扱い（捕まった＝継続不可、拉致監禁＝行方不明）
+    const REPORT_STATUS = {
+        1: { 4: '継続不可', 5: '行方不明', 6: 'ロスト' },
+        2: { 1: '継続不可', 2: '継続不可', 4: '継続不可', 5: '行方不明', 6: '行方不明', 8: 'ロスト' },
+        3: { 3: '継続不可', 4: 'ロスト', 5: 'ロスト' },
+        4: { 5: '継続不可', 8: 'ロスト' }
+    };
     function reportStatus(n, r) {
-        if (r.code === null) return '生還';
-        const end = ENDING_DATA.individual[n].ends[r.code];
-        if (end && end.lost) return 'ロスト';
-        const missing = (n === 1 && r.code === 5) || (n === 2 && (r.code === 5 || r.code === 6));
-        return missing ? '行方不明' : '生還';
+        return REPORT_STATUS[n][r.code] || '生還';
     }
 
     // 誰がどうなったかは伏せ、最後の行に人数だけをまとめる
     function buildReport(res, names) {
-        const count = { '生還': 0, 'ロスト': 0, '行方不明': 0 };
+        const count = { '生還': 0, 'ロスト': 0, '行方不明': 0, '継続不可': 0 };
         const lines = HOS.map((n) => {
             const r = res.ind[n];
             count[reportStatus(n, r)] += 1;
@@ -426,7 +428,7 @@
             const who = names[n] === `HO${n}` ? `HO${n}` : `HO${n} ${names[n]}`;
             return `${who}：${code}`;
         });
-        const summary = ['生還', 'ロスト', '行方不明']
+        const summary = ['生還', 'ロスト', '行方不明', '継続不可']
             .filter((k) => count[k] > 0)
             .map((k) => `${count[k]}${k}`)
             .join('');
