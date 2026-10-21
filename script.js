@@ -1,164 +1,457 @@
-const storyData = {
-    main: {
-        A: { title: "END A：箱庭の崩壊と、光差す夜明け", text: "特捜班の「答え」をスマホ越しに聞いた七瀬は、一瞬だけ息を呑み、獰猛で、しかし安堵したような声を上げた。\n\n七瀬游也「総監の首を確実に獲れる証拠か……！ ハッ、上等じゃねえか。よくやった特捜班。そのカードだけは、何が何でも死守して地上へ持ち帰れ！ これより俺の権限で、マスコミ各社へ『牧野鑑識課長および遠藤智也殺害事件の真相』と『九条総監への内部告発状』を同時に一斉リークする！ 事件の全貌をこの瞬間に公表して、上の隠蔽工作の退路を完全に断ってやるよ！」\n\nガチリ、と一方的に通話が切れる。直後、遠く地上の方向から、廃墟の静寂を切り裂くようにサイレンの音が響く。君たちはSDカードを握りしめ、地下の階段を確実に登り始める。地上へ出ると無数の赤色灯が埋め尽くしていた。君たちは堂々と突き進み、崩れゆく箱庭を後にした。\n\n長い、あまりにも長い闇だった。地平線の向こうから光が差し込み、君たちの影を長く地面に引いていく。その光は、あの『HoneyDew』の甘い蜜の香りも、地下の悍ましい記憶も、すべてを等しく洗い流していくようだった。" },
-        B: { title: "END B：完璧なシンメトリー", text: "七瀬の問いをのらりくりりと躱し、通話をきる。地下室には再び、耳が痛くなるほどの静寂が戻る。[HO3]は血に濡れた画面を消し、「SDカード」を冷たい泥濘の底へと迷いなく滑り落とした。\n\n時刻は21時。まもなく別班が踏み込んでくるだろう。だがその前に、[HO3]は医療用メスを正確に構え直した。これより、彼自身の「左右対称の芸術」の時間が始まる。特捜班という名の歪な美しい駒たちは、[HO3]の手によって、頭頂部から正中線に沿って会陰部まで、寸分の狂いもなく『完全な左右対称』に切り刻まれていく。\n\nそれは、彼らに与えられた究極の救済であり、最高傑作のアートだった。[HO3]は満足げに微笑み、返り血を拭うと、静かに崩れゆく箱庭を後にすることだろう。" },
-        C: { title: "END C：箱庭に注がれた甘美な蜜", text: "静まり返った地下室。そこには、圧倒的な暴力を前に力尽き、物言わぬ骸となった特捜班の姿があった。真実も命も何一つ持ち帰られることはなく、すべては『アブホースの落とし子』へと呑み込まれていった。\n\n時刻は21時。地下室の重い鉄扉が開く。階段を降りてきたのは警視総監・九条院司、そして隣で優雅に微笑むマスター、雨宮千歳だった。" },
-        D: { title: "END D：盤外へ零れ落ちた滴", text: "貴方たちは、ついにその地下室を蹴り出し、歪んだ「箱庭」の外へと滑り出した。\n背後で響いていた冒涜的な咆咆、甘美な蜜の匂いが、次第に遠ざかっていく。\n全身に浴びた泥と返り血は、貴方たちが「盤面」から逃げ出した代償だ。\nそれはどれだけ洗い流そうとしても、一生落ちることのない呪いのように、貴方たちの皮膚にこびりついている。\n\n夜空を見上げれば、そこには雨が降り続いている。\n警察の制服も、刑事としての誇りも、あるいは歪な愛着も。\n貴方たちはその全てを地下室に置き去りにしてきた。\n貴方たちは生き残った。\n\nだが、盤外へと零れ落ちた「駒」に、もはや帰るべき盤面はない。\nこれから始まるのは、誰にも称賛されず、ただ何者からも忘れ去られていく――そんな、静かで途途もなく長い、緩やかな死への旅路だ。\n\n雨音だけが、貴方たちの逃走の終わりを告げている。" },
-        E: { title: "END E：終わらない箱庭", text: "七瀬との通話を終え、スマートフォンは沈黙する。地下室には再び静寂が戻る。九条院司を終わらせる光など、この箱庭には最初から届かなかったのか。手元にあった「SDカード」は冷たい泥濘の底へと滑り落ち、二度と日の目を浴びることはない。\n\n凄惨な夜だった。廃病院から這い出してきた特捜班の姿は、あまりにもボロボロでバラバラだった。完璧に整えられたこの闇は、あの『HoneyDew』の甘い蜜の香りとともに、地下の悍ましい記憶を等しく包み込んでいくようだった。事件は九条院司の手によって完璧に隠蔽され、特捜班という臨時の箱庭は、歪にねじ切られて幕を閉じる。" }
-    },
-    ho: {
-        ho1: {
-            "0": { s: "生還",text: "貴方は、復讐という名の炎を心に抱いたまま、その戦場から逃げ出した。\nすべてをあの闇に置き去りにして。\n降りしきる雨の中、貴方はただ無機質な街路を歩いている。時折、ふと立ち止まって背後を振り返る。そこにはもう、何も存在しないはずなのに。\n声が聞こえた気がした。\nデモきっと気のせいだろう。\n貴方の戦いは終わったのではない。\n永遠に、結色の声が届かない場所へと逃げ延びただけなのだ。" },
-            "1": { s: "生還",text: "貴方たちが七瀬に託した「真実」は、巨大な権力を揺るがす光となりました。\n警察組織の闇が暴かれ、結色を殺した構造が根底から崩れ去ります。\n朝日に照らされる貴方の脳裏に、あの頃と変わらない結色の笑顔がよみがえります。\n「もう、大丈夫だよ」……貴方の復讐の炎は静かに消え、誇り高き刑事としての日常が戻ってきます。" },
-            "2": { s: "生還", text: "復讐を終えたその感触は、驚くほど軽やかなものでした。\n結色を奪った仇の骸を見下ろし、貴方はついに7年越しの悲願を果たした。\nしかし、返り血に染まった手を見つめ、貴方は悟ります。\n自分もまた、あの日結色を切り裂いた怪物と同類になったのだと。" },
-            "3": { s: "生還", text: "「仇は討った」。 \n事件の幕は降ろされ、真犯人とされる者は鉄格子の向こうへと消えていった。\n世間は警察の勝利を称え、貴方の7年越しの復讐も、公には完遂されたことになっています。\nしかし、貴方の心に灯っていた炎は、温もりを残さぬまま、不気味な「歪み」を孕んでくすぶり続けている。\n結色を奪った歪んだ美学と、真犯人の特徴――そのわずかなズレが、拭いきれない違和感となって、貴方の心にじわじわと侵食してくる。\n隣で微笑む[HO3]の真っ直ぐな瞳を、貴方は今も結色の面影と共に守り続けています。\nそのことに安堵しながらも、貴方は時折、深い闇に目を凝らさずにはいられません。" },
-            "4": { s: "継続不可", text: "「犯人はお前だ」。\n冷たい鉄格子の向こうで、貴方は自分の名前が猟奇殺人犯として報じられるのを聞いた。 結色の仇を討つはずだった手には、今や不名誉な手錠だけが光っている。\nかつての仲間も組織も貴方を切り捨て、貴方は真犯人の嘲笑を背中に感じながら、永遠の泥に沈んでいくことになってしまった。" },
-            "5": { s: "行方不明", text: "光はもう届くことはない。\n貴方は[HO4]の手によって、公には「殉職」したものとして処理されてしまった。\n地下室よりも暗い、[HO4]だけが知る密室で、貴方は「壊れた玩具」として生かされている。\n復讐を誓ったその腕は重い鎖に繋がれ、貴方は時折、結色の遺体の「完璧な対称性」を思い出し、安堵に近い絶望に浸り続けることになるだろう。" },
-            "6": { s: "ロスト", text: "（肉体的ロストにより、描写ナシ）" }
-        },
-        ho2: {
-            "0": { s: "生還", text: "貴方は、その場から逃げ出した。\nかつて貴方に与えられた任務、目的、存在価値のすべてを、あの地下室に置き去りにして。\n逃げ出した先の街は、あまりにも静かだ。\n貴方の手には、もはや持ち主の命令を待つための機能も、目的を果たすための熱も残されていない。\n貴方はただの、使い道のなくなった「無」に過ぎない。\n誰の命令も聞こえない、ただひたすらに冷たい夜風が貴方の頬を撫でる。\n貴方は生き延びた。\nしかし、貴方という存在を定義していた「刃」は、もはや二度と研ぎ澄まされることはなく、静かに錆びついていくだけだ。\n貴方はこの広い世界で、何者にも戻れぬまま、ただの置物として朽ちていく時間を過ごすことになるだろう。" },
-            "1": { s: "生還", text: "貴方は自らの罪を告白した。\n7年前、凄惨な現場で血の海を掃除したあの夜のこと。\nShiftして、組織の闇を。\n七瀬の温かい手が、震える貴方の肩に置かれる。\n法による裁きは免れないでしょう。" },
-            "2": { s: "生還", text: "「私は、ただの雑巾ですから」。 貴方は自らの信念のために、すべての罪を被る道を選びました。\nかつて九条院司に与えられた「役割」を果たす。\n鉄格子の向こうへ消えていく貴方の横顔には、絶望ではなく、道具としての本望を遂げた恍惚とした微笑みが浮かんでいることでしょう。" },
-            "3": { s: "生還", text: "嵐は過ぎ去り、表面上の平穏が戻ってきました。\nしかし、貴方の首にかけられた鎖が外れることはありません。\n九条院司という絶対的な「神」が盤上から消え去ったとしても、貴方は依然として[HO4]の忠実な手足であり、代えのきく便利な『安物』のままです。\n深夜の呼び出し、命を顧みない過酷な任務、精度[HO4]からの冷徹な罵倒。\nそれこそが、貴方の渇望を潤す唯一の『蜜』であり、罪深き自分を繋ぎ止めるための刑罰なのです。\n「日常」という名の終わりのない使役の中で、貴方は今日も空っぽの瞳で、主人の命令を待ち続けます。\n道具としての本望を遂げ、いつか無残に使い潰されるその日まで、この幸福な支配は続いていくのです。 " },
-            "4": { s: "継続不可", text: "7年前、貴方はゴミを捨てました。\n今度は、貴方がゴミとして捨てられる番です。\n貴方はかつての栗田陸のように、組織の不祥事をすべて背負わされ、冷たい監獄へと送られた。\nですが、その横顔に悲しみはないことでしょう。\n誰かの役に立ち、無惨に使い潰されること。\nその「道具」としての役割を完遂し、貴方は満足げに微笑んで、社会から消滅していくのです。 " },
-            "5": { s: "行方不明", text: "意識は遠い海の底に沈み、思考の欠片さえも形を成しません。\nですが、[HO3]の粘りつくような視線だけは本能的に感じ取れることでしょう。\n貴方は「雑巾」ではなく「傑作」として、[HO3]の箱庭に迎え入れられました。\n狂信的な慈愛に満ちた檻の中で、貴方は新たな支配の輝きに跪き、永遠に飾られ続ける悦びに浸ることになるでしょう。" },
-            "6": { s: "行方不明", text: "「壊れた安物」。\nその言葉が、今の貴方にとって唯一の救いでした。\n[HO4]の私的な檻の中で、貴方は名前も意志も奪われ、ただの「モノ」として飼育されています。\n蹂躙される痛みだけが、自分がここに存在することを証明する唯一の感触。\nこれこそが、貴方が心の底から求めていた究極の「罰」だったのでしょう。" },
-            "7": { s: "生還", text: "貴方は自らの手で、その首にかけ続けていた見えない首輪を外しました。\n「雑巾」という立場を捨て、泥にまみれた罪を抱えたまま、一人の人間として歩むことを決めたのです。\n支配に身を委ねる安らかな日々は、もう二度と訪れることはないでしょう。\nこれからは自らの意志で悩み、選び、そして傷つかなければなりません。\nですが、その耐えがたい「自由」の重みこそが、貴方が人間へと戻った何よりの証です。 霧が晴れたその先で、貴方は初めて自分自身の足で、明日へと続く一歩を踏み出しました。" },
-            "8": { s: "ロスト", text: "（肉体的ロストにより、描写ナシ）" }
-        },
-        ho3: {
-            "0": { s: "生還", text: "貴方は、この「箱庭」の正体を目の当たりにし、そして逃げ出した。\n貴方が地下室を背にして走ったのは、父への反逆か、それとも恐怖からの逃避か。\nそれは貴方自身にも分からない。\n逃げ延びた先で貴方は、父の瞳の色を街の灯りに重ね、ふと足を止める。\n貴方は父の「子供」であり、その血の呪縛から逃れることは一生できないのだと、悟らざるを得ないからだ。\nどれほど遠くへ逃げようとも、貴方の心には父が植え付けた歪な美学が、根を張り続けている。 貴方は生き延びた。\nだが、貴方は自分の中に父の亡霊を飼い続ける檻の中から、一生出ることはできない。\nその事実は、この先何十年生きようとも、貴方の胸を締め付け続けるだろう。" },
-            "1": { s: "生還", text: "「正義の味方」としての貴方は生き続ける。\n指先にはまだ牧野の臓器を切り裂いた時の滑らかな感触が残っているが、貴方の顔は世界で最も「正しく整った」仮面で覆われています。\n父の期待に応え、盤上の不純なノイズを掃除したという全能感。\n次は誰を、私の芸術の一部にしてあげようか。\n日常の裏側で刃を研ぎ澄ます完璧な貴方の物語は、きっと終焉を迎えることなどないでしょう。" },
-            "2": { s: "生還", text: "盤面は、貴方の望み通りに整いました。\n愚かな駒たちに罪を着せ、貴方は「運命の証」である[HO2]を、誰にも見つからない貴方の聖域へと連れこみます。\nそこで貴方は、壊れた[HO2]を自分の美学で塗り潰し、永遠に飾るのか。\n二人だけの完璧なシンメトリー。\nそこにはもう、不純なノイズは一切存在しません。\n貴方は「影」であることをやめ、自らの箱庭を統べる真の王となるのでしょう。" },
-            "3": { s: "継続不可", text: "これもまた、一つの対称性かもしれません。\n7年前、貴方が栗田陸に強いた絶望を、今度は貴自身が味わう番です。\n自首という形で自らを「悪」として差し出すその姿は、あまりにも美しく、部署「正しく」歪んでいました。\n鉄格子の影が描く縞模様の中で、貴方は自分という「作品」を完成させ、陶酔のなかで眠りにつくことでしょう。" },
-            "4": { s: "ロスト", text: "芸術は、未完成のまま幕を閉じる。\n復讐に燃える[HO1]の手が、貴方に最後を告げる。\n崩れ去る意識の中で、貴方は自分が作り上げた「左右対称の作品」たちだが、暗闇から貴方を冷たく笑っているような声を聴く。\n返り血に染まった地下室で、貴方の美学は泥にまみれ、永遠に失われた。" },
-            "5": { s: "ロスト", text: "（肉体的ロストにより、描写ナシ）" }
-        },
-        ho4: {
-            "0": { s: "生還", text: "貴方は、あの地下室の熱狂を、父の歪んだ愛を、その身に焼き付けたまま逃げ出した。\n貴方にとって「愛されること」とは「支配されること」であり、「生きること」とは「誰かを壊すこと」であったはずだ。\nそれなのに、貴方はその盤面から自らの足で飛び出してしまった。\n誰もいない暗い路地裏で、貴方は笑ってみる。\nだが、そこには貴方を称賛する父も、怯える獲物もいない。\n貴方が何者かを傷つけようとしても、この街の雑踏は貴方の狂気を笑い飛ばし、誰一人として貴方の「美学」を理解してはくれない。\n貴方は生き延びた。\nだが、それは貴方が最も恐れていた「特別ではない自分」の始まりに過ぎない。\n誰からも注目されず、誰も壊さず、ただ誰からも忘れ去られていくのだろう。" },
-            "1": { s: "生還", text: "「チェックメイト」。\nすべて貴方の描いた筋書き通り、盤上の駒は完璧に配置された。\n忌々しき父・九条院司を玉座から引きずり落とし、その絶対的な支配権を完全に簒奪(さんだつ)する。\n貴方の悪意によって心を粉々にへし折られ、廃人となった[HO1]。\n貴方の足元で、従順に尽くす[HO2]。\n哀れなピエロとして鉄格子の向こうへ送られた[HO3]。\nかつて父が支配していたドス黒い警察組織の頂点に、今度は貴方が「新たなキング」として君臨するその日も次期に訪れることでしょう。" },
-            "2": { s: "生還", text: "実父である九条院司の失脚、[HO1]の精神崩壊、そして忠実な奴隷たる[HO2]。\nゲームは貴方の圧倒的な勝利で幕を閉じる。\nただ一つ、この完璧なチェス盤において未解決のまま残されたのは、あの猟奇殺人の真犯人が一体誰だったのか、ついにその正体にすらたどり着けなかったということ。\nしかし、貴方の心にあるのは焦燥でも敗北感でもありません。\n貴方にとってあの猟奇殺人など、実父を玉座から引きずり落とし、邪魔な駒を蹂躙するための都合のいい舞台装置に過ぎなかったのだから。" },
-            "3": { s: "生還", text: "九条院司の失脚。\n貴方の切望は果たされ、父の帝国は崩壊した。\nしかし、ふと見渡したチェス盤の上には、もう誰も残っていない。\n心を折るはずだった[HO1]も、便利な道具だった[HO2]も、猟奇の怪物だった[HO3]も、すべては泥をすすって無残に砕け散った。\n静まり返った玉座で、貴方は手に入れた絶対的な権力、勝利の果実――それは驚くほどに無味乾燥で、退屈なもの。\n誰もいない盤面、砕けた駒の破片が貴方の瞳には映っていた。" },
-            "4": { s: "生還", text: "実父である九条院司に失脚をさせることは出来なかった。\nどれほど憎悪を滾らせようとも、実父である警視総監・九条院司の牙城(がじょう)はあまりにも高く、切り札になるはずだったSDカードは巨大な権力によって跡形もなく握りつぶされた。\nミリ単位の狂いもなく整頓された冷ややかなデスクの奥から、実父はあなたを冷淡に見下ろす。\n「……まだ完璧なキングになりきれんようだな」\nその声が耳朶を打った瞬間、幼少期から植え付けられてきた『教育』という名の虐待の痛みが頭の芯で激しく跳ね上がる。\nどれだけ足掻こうとも、あなたは『九条』という絶対的な血の呪縛から一歩も抜け出せてはいなかった。\nあなたは再び、息の詰まる仮面を被り直し、実父に飼い殺されるだけの日常へと戻っていくしかなかった。" },
-            "5": { s: "継続不可", text: "「チェックメイト」。 \nその冷酷な宣告を突きつけられたのは、他ならぬ貴方自身でした。\n父・九条院司の牙城(がじょう)は崩せず、あろうことか[HO3]たちの策略によって、貴方がすべての猟奇殺人の泥を背負わされることになった。\n冷たい鉄格子の向こう、自由を奪われた手。\nしかし、貴方の瞳から傲慢な光が消えることはないだろう。\n敗北の屈辱にまみれながらも、貴方の脳裏ではすでに、この最悪の盤面をどうひっくり返すかの計算が始まっている。\n暗闇の中、低く響く貴方の笑い声は、終わりなき悪意の逆襲を告げていた。" },
-            "6": { s: "生還", text: "「壊れた安物」。\nそれが、貴方が目の前の玩具に与えた新しい名前。\n意志も、言葉も、尊厳もすべてを剥ぎ取り、貴方の私的な檻の中に閉じ込めた[HO2]。\nかつて九条院司の道具だったそれは、今や完全に貴方だけの「モノ」となった。\n貴方が与える蹂躙と痛みだけを栄養にして、ただ生かされている哀れな存在。\nすっかり壊れて使い物にならなくなった安物を、明日はどう弄び、どう擦り切らせていこうか。" },
-            "7": { s: "生還", text: "「チェックメイト」。そして、ゲームセット。 \n盤上から取り除かれた二つの美しい駒は、今や貴方個人の檻の中に並んで収まっている。\nかつては牙を剥き、復讐の炎を燃やしていたはずの[HO1]。\nかつては誰かの道具として、必死に自分の存在価値を探していた[HO2]。\n誇り高きルークの折れた心を、従順なナイトの擦り切れた肉体を、今日はどう並べ、どう弄び、どう歪ませていくのだろうか。" },
-            "8": { s: "ロスト", text: "（肉体的ロストにより、描写ナシ）" }
-        }
+// =============================================================
+// 『箱庭に注がれた甘美な蜜』 エンド判定ツール
+//   判定ルールはシナリオ本文「エンド分岐のための確認処理」
+//   「全体エンド分岐」「個別エンド分岐」に準拠しています。
+//   本文データは endings.js にあります。
+// =============================================================
+(function () {
+    'use strict';
+
+    const HOS = [1, 2, 3, 4];
+    const CULPRIT_LABEL = { HO1: 'HO1', HO2: 'HO2', HO3: 'HO3', HO4: 'HO4', mita: '三田／第三者', none: 'なし' };
+
+    // ---------- 小物 ----------
+    const $ = (id) => document.getElementById(id);
+    const radio = (name) => {
+        const el = document.querySelector(`input[name="${name}"]:checked`);
+        return el ? el.value : null;
+    };
+    const checked = (id) => $(id).checked;
+
+    function escapeHtml(s) {
+        return String(s)
+            .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
     }
-};
 
-document.getElementById('generateBtn').addEventListener('click', function() {
-    const mainKey = document.getElementById('sel_main').value;
-    if (mainKey === "none") { alert("全体ENDを選択してください。"); return; }
-    
-    const names = {
-        "[HO1]": document.getElementById('name_ho1').value || "HO1",
-        "[HO2]": document.getElementById('name_ho2').value || "HO2",
-        "[HO3]": document.getElementById('name_ho3').value || "HO3",
-        "[HO4]": document.getElementById('name_ho4').value || "HO4"
-    };
+    function getNames() {
+        const names = {};
+        HOS.forEach((n) => {
+            const v = $(`name_ho${n}`).value.trim();
+            names[n] = v || `HO${n}`;
+        });
+        return names;
+    }
 
-    const replaceNames = (text) => {
-        let res = text;
-        for (const [tag, name] of Object.entries(names)) {
-            res = res.split(tag).join(`<span class="highlight">${name}</span>`);
+    // {HO1}〜{HO4} を名前に置換（HTMLエスケープ済みで返す）
+    function fill(text, names) {
+        return escapeHtml(text).replace(/\{HO([1-4])\}/g, (_, n) => escapeHtml(names[n]));
+    }
+    function fillPlain(text, names) {
+        return String(text).replace(/\{HO([1-4])\}/g, (_, n) => names[n]);
+    }
+
+    // ---------- 入力の読み取り ----------
+    function readInput() {
+        return {
+            battle: radio('battle'),
+            status: {
+                1: radio('ho1_status'),
+                2: radio('ho2_status'),
+                3: radio('ho3_status'),
+                4: radio('ho4_status')
+            },
+            ho1Broken: checked('ho1_broken'),
+            ho2Broken: checked('ho2_broken'),
+            culprit: radio('culprit'),
+            sd: checked('sd_reported'),
+            ho2Choice: radio('ho2_choice'),
+            ho2Confess: checked('ho2_confess'),
+            ho2Volunteer: checked('ho2_volunteer'),
+            ho4OnHo1: radio('ho4_on_ho1'),
+            ho4OnHo2: radio('ho4_on_ho2'),
+            ho3OnHo2: radio('ho3_on_ho2'),
+            ho2Pick: radio('ho2_pick'),
+            ho3Solo: radio('ho3_solo')
+        };
+    }
+
+    // =========================================================
+    // 判定本体（DOMに依存しない純粋関数）
+    // =========================================================
+    function evaluate(inp) {
+        const notes = [];
+        const s = Object.assign({}, inp.status);
+
+        const isDead = (n) => s[n] === 'lost' || s[n] === 'killed';
+        const isPresent = (n) => s[n] === 'alive' || s[n] === 'surrender'; // 最後まで地下室にいる
+
+        // --- 戦闘結果による補正 ---
+        if (inp.battle === 'lose') {
+            HOS.forEach((n) => { if (isPresent(n)) s[n] = 'lost'; });
+        } else if (inp.battle === 'escape') {
+            HOS.forEach((n) => { if (isPresent(n)) s[n] = 'escaped'; });
         }
-        return res;
-    };
 
-    let html = `<div class="desc-text"><strong>${storyData.main[mainKey].title}</strong>\n\n${replaceNames(storyData.main[mainKey].text)}</div>`;
+        const defeated = inp.battle === 'defeat';
 
-    const summaryResults = [];
+        // --- HO2「B：死を選ぶ」 ---
+        if (defeated && isPresent(2) && !inp.ho2Broken && inp.ho2Choice === 'B') {
+            s[2] = 'lost';
+        }
 
-    // CとD以外は通常通りHO個別のボックス(ho-box)を出力する
-    if (mainKey !== 'C' && mainKey !== 'D') {
-        const hos = ["ho1", "ho2", "ho3", "ho4"];
-        const hoLabels = ["HO1：復讐", "HO2：被虐", "HO3：正義", "HO4：加虐"];
-        
-        hos.forEach((ho, i) => {
-            const val = document.getElementById(`sel_${ho}`).value;
-            if (val !== "none" && storyData.ho[ho][val]) {
-                const item = storyData.ho[ho][val];
-                summaryResults.push({ ho: `HO${i+1}`, code: `${mainKey}-${val}`, status: item.s });
-                html += `<div class="ho-box"><span class="ho-tag">${hoLabels[i]}</span><div class="desc-text">${replaceNames(item.text)}</div></div>`;
+        // --- HO3単独生存 ---
+        const solo = defeated && isPresent(3) && [1, 2, 4].every(isDead);
+
+        // --- 犯人の確定 ---
+        const ho2Volunteered = defeated && isPresent(2) && !inp.ho2Broken && inp.ho2Volunteer;
+        let culprit = defeated ? inp.culprit : 'none';
+        if (ho2Volunteered) culprit = 'HO2';
+        if (s[3] === 'surrender') culprit = 'HO3';
+        if (solo) {
+            if (inp.ho3Solo === 'A') { s[3] = 'surrender'; culprit = 'HO3'; }
+            else if (culprit === 'HO3') culprit = 'mita'; // B/C は身代わりを立てる
+        }
+        const ho3Arrested = s[3] === 'alive' && culprit === 'HO3';
+
+        // --- 精神崩壊したPCの処遇（有効な場合のみ） ---
+        const fate = activeFates(inp, s, culprit);
+
+        // 罪を着せられたPC
+        const framed = new Set();
+        if (['HO1', 'HO2', 'HO4'].includes(culprit) && !(culprit === 'HO2' && ho2Volunteered)) framed.add(culprit);
+        if (fate.ho4OnHo1 === 'B') framed.add('HO1');
+        if (fate.ho4OnHo2 === 'B' || fate.ho3OnHo2 === 'B') framed.add('HO2');
+
+        // 監禁
+        const ho1Caged = fate.ho4OnHo1 === 'C';
+        let ho2CagedBy = null;
+        const c4 = fate.ho4OnHo2 === 'C';
+        const c3 = fate.ho3OnHo2 === 'C';
+        if (c4 && c3) ho2CagedBy = inp.ho2Pick === 'HO3' ? 'HO3' : 'HO4';
+        else if (c4) ho2CagedBy = 'HO4';
+        else if (c3) ho2CagedBy = 'HO3';
+
+        if (ho1Caged && framed.has('HO1')) {
+            framed.delete('HO1');
+            notes.push('HO1は「犯人として報告」と「監禁」が両方選ばれています。監禁を優先して判定しました（公には殉職扱い）。');
+        }
+        if (ho2CagedBy && framed.has('HO2')) {
+            framed.delete('HO2');
+            notes.push('HO2は「罪を着せる」と「監禁」が両方選ばれています。監禁を優先して判定しました。');
+        }
+
+        // HO3が罪の擦り付けに成功したか
+        const ho3Free = s[3] === 'alive' && !ho3Arrested;
+        const framingSuccess = ho3Free && (['HO1', 'HO2', 'HO4', 'mita'].includes(culprit) || framed.size > 0);
+
+        // --- 全体END ---
+        let overall;
+        const anyPresent = HOS.some(isPresent);
+        const anyEscaped = HOS.some((n) => s[n] === 'escaped');
+        if (inp.battle === 'lose') overall = 'C';
+        else if (inp.battle === 'escape') overall = 'D';
+        else if (!anyPresent) {
+            overall = anyEscaped ? 'D' : 'C';
+            notes.push('「撃破した」になっていますが、地下室に残っているHOがいません。' + (anyEscaped ? '全員逃走（END D）' : '全滅（END C）') + 'として判定しました。');
+        }
+        else if (solo && inp.ho3Solo === 'B') overall = 'B';
+        else if (inp.sd) overall = 'A';
+        else overall = 'E';
+
+        // 補正の告知
+        HOS.forEach((n) => {
+            if (inp.status[n] !== s[n]) {
+                if (inp.battle === 'lose' && s[n] === 'lost') notes.push(`HO${n}は敗北によりロスト扱いになります。`);
+                if (inp.battle === 'escape' && s[n] === 'escaped') notes.push(`HO${n}は全員逃走のため逃走扱いになります。`);
+                if (n === 2 && s[n] === 'lost' && inp.ho2Choice === 'B' && defeated) notes.push('HO2は「B：死を選ぶ」によりロスト扱いになります。');
+                if (n === 3 && s[n] === 'surrender' && solo) notes.push('HO3は単独生存時の「A：自首」により自首扱いになります。');
             }
         });
-        
-        // END Aの時のみ前向きな締めくくり文を出力
-        if (mainKey === 'A') {
-            html += `<div class="desc-text">しかし、君たちが命を賭して掴み取ったこの光は、二度と組織の闇に揉み消されることはない。冷たいコンクリートの隙間から、新しい正義の芽が息吹く（いぶく）のを感じながら、君たちは新しい一歩を踏み出した。</div>`;
+        if (ho2Volunteered && inp.culprit !== 'HO2') notes.push('HO2が自ら名乗り出たため、報告した犯人はHO2として扱いました。');
+        if (inp.status[3] === 'surrender' && defeated && inp.culprit !== 'HO3') notes.push('HO3が自首したため、報告した犯人はHO3として扱いました。');
+
+        // --- 個別END ---
+        const ctx = { inp, s, culprit, framed, ho1Caged, ho2CagedBy, ho2Volunteered, ho3Arrested, framingSuccess, isDead, isPresent };
+        const ind = {
+            1: judgeHo1(ctx),
+            2: judgeHo2(ctx),
+            3: judgeHo3(ctx),
+            4: judgeHo4(ctx)
+        };
+
+        return { overall, ind, notes, status: s, culprit };
+    }
+
+    // 処遇の選択肢が有効かどうか（UIの有効/無効とも共有）
+    function activeFates(inp, s, culprit) {
+        const defeated = inp.battle === 'defeat';
+        const present = (n) => s[n] === 'alive' || s[n] === 'surrender';
+        const ho3CanAct = s[3] === 'alive' && culprit !== 'HO3';
+        const ho4OnHo1 = defeated && inp.ho1Broken && present(1) && present(4) ? inp.ho4OnHo1 : null;
+        const ho4OnHo2 = defeated && inp.ho2Broken && present(2) && present(4) ? inp.ho4OnHo2 : null;
+        const ho3OnHo2 = defeated && inp.ho2Broken && present(2) && ho3CanAct ? inp.ho3OnHo2 : null;
+        return { ho4OnHo1, ho4OnHo2, ho3OnHo2 };
+    }
+
+    // ---------- HO1 ----------
+    function judgeHo1(c) {
+        const { s, culprit, inp } = c;
+        if (c.isDead(1)) return { code: 6 };
+        if (s[1] === 'escaped') return { code: 0 };
+        if (c.ho1Caged) return { code: 5 };
+        if (c.framed.has('HO1')) return { code: 4 };
+        if (s[3] === 'killed') return { code: 2 };
+        if (inp.sd && culprit === 'HO3') return { code: 1 };
+        if (['HO2', 'HO4', 'mita'].includes(culprit)) return { code: 3 };
+        if (culprit === 'HO3') return { code: 1, note: 'SDカード未提出のため厳密には条件外です。HO3の逮捕による決着としてEND 1を準用しています。' };
+        if (inp.sd) return { code: 1, note: '犯人の報告がないため厳密には条件外です。SDカードによる告発としてEND 1を準用しています。' };
+        return { code: null, note: '犯人の報告もSDカードの提出もないため、本編に該当する個別ENDがありません。KP裁量で描写してください。' };
+    }
+
+    // ---------- HO2 ----------
+    function judgeHo2(c) {
+        const { s, inp } = c;
+        if (c.isDead(2)) return { code: 8 };
+        if (s[2] === 'escaped') return { code: 0 };
+        if (c.ho2CagedBy === 'HO3') return { code: 5 };
+        if (c.ho2CagedBy === 'HO4') return { code: 6 };
+        if (c.ho2Volunteered) return { code: 2 };
+        if (c.framed.has('HO2')) return { code: 4 };
+        if (inp.ho2Broken) return { code: 3, note: '精神崩壊したまま連れ帰られた場合の専用ENDはないため、END 3を準用しています。' };
+        if (inp.ho2Confess && inp.sd) return { code: 1 };
+        if (inp.ho2Choice === 'C') return { code: 7 };
+        if (inp.ho2Confess) return { code: 1, note: 'SDカード未提出のため厳密には条件外です。自白した結末としてEND 1を準用しています。' };
+        return { code: 3 };
+    }
+
+    // ---------- HO3 ----------
+    function judgeHo3(c) {
+        const { s } = c;
+        if (s[3] === 'killed') return { code: 4 };
+        if (c.isDead(3)) return { code: 5 };
+        if (s[3] === 'escaped') return { code: 0 };
+        if (s[3] === 'surrender') return { code: 3 };
+        if (c.ho3Arrested) return { code: null, note: '正体を暴かれて逮捕・拘束された場合の個別ENDは本編に定義されていません。KP裁量で描写してください。' };
+        if (c.framingSuccess && c.ho2CagedBy === 'HO3') return { code: 2 };
+        if (c.framingSuccess) return { code: 1 };
+        return { code: 1, note: '罪の擦り付けは成立していませんが、正体を暴かれないまま生還したためEND 1を準用しています。' };
+    }
+
+    // ---------- HO4 ----------
+    function judgeHo4(c) {
+        const { s, inp } = c;
+        if (c.isDead(4)) return { code: 8 };
+        if (s[4] === 'escaped') return { code: 0 };
+        if (c.ho1Caged && c.ho2CagedBy === 'HO4') return { code: 7 };
+        if (c.ho2CagedBy === 'HO4') return { code: 6 };
+        if (c.ho1Caged) return { code: 7, note: 'HO1のみを監禁した場合の専用ENDはないため、END 7を準用しています（HO2に関する一文は省いて読み上げてください）。' };
+        if (!inp.sd) return c.framed.has('HO4') ? { code: 5 } : { code: 4 };
+        if ([1, 2, 3].every(c.isDead)) return { code: 3 };
+        const ho1Insane = inp.ho1Broken && c.isPresent(1);
+        const ho2Kept = c.isPresent(2) && !c.framed.has('HO2') && !c.ho2Volunteered && c.ho2CagedBy !== 'HO3'
+            && !inp.ho2Confess && (inp.ho2Broken || inp.ho2Choice === 'A');
+        const ho3Caught = c.ho3Arrested || s[3] === 'surrender';
+        if (ho1Insane && ho2Kept) return { code: ho3Caught ? 1 : 2 };
+        return { code: null, note: '父の失脚には成功しましたが、END 1〜3の条件（HO1の発狂・HO2を道具として保持 など）を満たしていません。本編に該当する個別ENDがないため、KP裁量で描写してください。' };
+    }
+
+    // =========================================================
+    // 表示
+    // =========================================================
+    function endLabel(overall, n, r) {
+        if (r.code === null) return `END ${overall}（個別END該当なし）`;
+        const end = ENDING_DATA.individual[n].ends[r.code];
+        const lost = end && end.lost ? '・ロスト' : '';
+        return `END ${overall}-${r.code}${lost}`;
+    }
+
+    function render() {
+        const inp = readInput();
+        const names = getNames();
+        updateAvailability(inp);
+
+        const res = evaluate(inp);
+        const ov = ENDING_DATA.overall[res.overall];
+
+        const box = $('resultBox');
+        box.className = 'result-area end-' + res.overall;
+        $('resultName').textContent = `【END ${res.overall}：${ov.title}】へ分岐`;
+
+        let html = '<ul class="report-list">';
+        HOS.forEach((n) => {
+            html += `<li><span class="report-ho">${escapeHtml(names[n])}</span>${escapeHtml(endLabel(res.overall, n, res.ind[n]))}</li>`;
+        });
+        html += '</ul>';
+        if (res.notes.length) {
+            html += '<ul class="note-list">' + res.notes.map((t) => `<li>${escapeHtml(t)}</li>`).join('') + '</ul>';
         }
-    } else if (mainKey === 'D') {
-        // END Dの場合は全員共通で【END D】とし、ステータスは「生還」として処理する
-        ["HO1", "HO2", "HO3", "HO4"].forEach(h => summaryResults.push({ ho: h, code: "D", status: "生還" }));
-    } else if (mainKey === 'C') {
-        // END Cの場合は全員共通で【END C】とし、ステータスは「ロスト」として処理する
-        ["HO1", "HO2", "HO3", "HO4"].forEach(h => summaryResults.push({ ho: h, code: "C", status: "ロスト" }));
+        $('resultDesc').innerHTML = html;
+
+        return res;
     }
 
-    const endTitles = {
-        'A': '箱庭の崩壊と、光差す夜明け',
-        'B': '完璧なシンメトリー',
-        'C': '箱庭に注がれた甘美な蜜',
-        'D': '盤外へ零れ落ちた滴',
-        'E': '終わらない箱庭'
-    };
+    // 入力欄の有効/無効を切り替える
+    function setOff(el, off) {
+        if (!el) return;
+        el.classList.toggle('is-off', off);
+        el.querySelectorAll('input').forEach((i) => { i.disabled = off; });
+    }
 
-    // エピローグ描写 (すべてのエンドでBar HoneyDewを描写する)
-    html += `<div class="honeydew-area">`;
-    html += `<div class="desc-text">――エピローグ：Bar HoneyDew――\n\nジャズの流れる、薄暗く落ち着いた『Bar HoneyDew』の店内。いつもと変わらない、静かで美しい闇。\n\nカウンターの奥では、20代そこそこにしか見えない若々しいマスターが、穏やかな微笑みを浮かべながら、手元のグラスを丁寧に、丁寧に磨き上げている。\n\n${getHoneydewFullScript(mainKey, names)}\n\n──Call of Cthulhu『箱庭に注がれた甘美な蜜』\n${endTitles[mainKey]}にて、幕引き。</div>`;
-    html += `</div>`;
+    function updateAvailability(inp) {
+        const defeated = inp.battle === 'defeat';
+        const st = inp.status;
+        const present = (n) => st[n] === 'alive' || st[n] === 'surrender';
 
-    // 通過報告用まとめ
-    let statusCounts = { "生還": 0, "ロスト": 0, "行方不明": 0, "継続不可": 0 };
-    let summaryHtml = `<div class="report-summary">`;
-    summaryResults.forEach(r => {
-        summaryHtml += `<span class="report-line">${r.ho}【END ${r.code}】</span>`;
-        if (statusCounts[r.status] !== undefined) {
-            statusCounts[r.status]++;
+        // 精神崩壊チェック
+        setOff(document.querySelector('[data-req="ho1-alive"]'), !(st[1] === 'alive') || inp.battle !== 'defeat');
+        setOff(document.querySelector('[data-req="ho2-alive"]'), !(st[2] === 'alive') || inp.battle !== 'defeat');
+
+        // 3. 七瀬への報告
+        setOff($('sec_report'), !defeated);
+
+        // 4. HO2の決断
+        setOff($('sec_ho2'), !(defeated && st[2] === 'alive' && !inp.ho2Broken));
+
+        // 5. 処遇
+        let culprit = inp.culprit;
+        if (defeated && st[2] === 'alive' && !inp.ho2Broken && inp.ho2Volunteer) culprit = 'HO2';
+        if (st[3] === 'surrender') culprit = 'HO3';
+        const fate = activeFates(inp, st, culprit);
+        const on41 = fate.ho4OnHo1 !== null;
+        const on42 = fate.ho4OnHo2 !== null;
+        const on32 = fate.ho3OnHo2 !== null;
+        const onPick = on42 && on32 && inp.ho4OnHo2 === 'C' && inp.ho3OnHo2 === 'C';
+        setOff($('blk_ho4_on_ho1'), !on41);
+        setOff($('blk_ho4_on_ho2'), !on42);
+        setOff($('blk_ho3_on_ho2'), !on32);
+        setOff($('blk_ho2_pick'), !onPick);
+        $('sec_fate').classList.toggle('is-off', !(on41 || on42 || on32));
+
+        // 6. 単独生存
+        const solo = defeated && st[3] === 'alive' && [1, 2, 4].every((n) => st[n] === 'lost' || st[n] === 'killed');
+        setOff($('sec_solo'), !solo);
+    }
+
+    // ---------- 物語の組み立て ----------
+    function buildStory() {
+        const res = render();
+        const names = getNames();
+        const ov = ENDING_DATA.overall[res.overall];
+        const inp = readInput();
+        const parts = [];
+
+        const text = (t) => { if (t) parts.push(`<div class="story-block">${fill(t, names)}</div>`); };
+        const head = () => {
+            parts.push(`<div class="story-head">END ${res.overall}：${escapeHtml(ov.title)}</div>`);
+            parts.push(`<div class="kp-note">達成条件：${fill(ov.cond, names)}</div>`);
+        };
+
+        const indBlock = (n) => {
+            const r = res.ind[n];
+            const data = ENDING_DATA.individual[n];
+            const label = `${escapeHtml(names[n])}（HO${n}：${data.label}）`;
+            if (r.code === null) {
+                parts.push(`<div class="ind-block"><div class="ind-head">${label} ― 個別END該当なし</div><div class="kp-note">${escapeHtml(r.note)}</div></div>`);
+                return;
+            }
+            const end = data.ends[r.code];
+            let inner = `<div class="ind-head">${label} ― 【END ${r.code}】</div>`;
+            inner += `<div class="kp-note">条件：${fill(end.cond, names)}</div>`;
+            if (r.note) inner += `<div class="kp-note">※${escapeHtml(r.note)}</div>`;
+            if (end.text) inner += `<div class="ind-text">${fill(end.text, names)}</div>`;
+            else inner += '<div class="kp-note">個別描写なし</div>';
+            parts.push(`<div class="ind-block">${inner}</div>`);
+        };
+
+        const inds = (filter) => {
+            const list = HOS.filter(filter);
+            if (!list.length) return;
+            parts.push('<div class="ind-wrap"><div class="kp-note">▼ ここから個別エンディング</div>');
+            list.forEach(indBlock);
+            parts.push('<div class="kp-note">▲ ここまで個別エンディング</div></div>');
+        };
+
+        head();
+        switch (res.overall) {
+            case 'A':
+            case 'E':
+                text(ov.before);
+                inds(() => true);
+                text(ov.after);
+                break;
+            case 'B':
+                text(ov.before);
+                if (!inp.sd) text(ov.sdDrop);
+                text(ov.main);
+                inds((n) => n === 3);
+                text(ov.after);
+                break;
+            case 'C':
+                text(ov.before);
+                inds((n) => res.status[n] === 'escaped');
+                text(ov.after);
+                break;
+            case 'D':
+                text(ov.before);
+                inds(() => true);
+                text(ov.after);
+                break;
         }
-    });
-    
-    const statusOrder = ["生還", "ロスト", "行方不明", "継続不可"];
-    const activeStats = statusOrder
-        .map(s => statusCounts[s] > 0 ? `${statusCounts[s]}${s}` : null)
-        .filter(v => v !== null);
-    
-    summaryHtml += `<span class="total-status">${activeStats.join(" ")}</span>`;
-    summaryHtml += `</div>`;
-    
-    html += summaryHtml;
 
-    const out = document.getElementById('output');
-    out.innerHTML = html;
-    out.style.display = "block";
-    window.scrollTo({ top: out.offsetTop, behavior: 'smooth' });
-});
+        // 通過報告用の表記
+        const report = HOS.map((n) => `${names[n]}：${endLabel(res.overall, n, res.ind[n])}`).join(' ／ ');
+        parts.push(`<div class="kp-note report-line">通過報告用：${escapeHtml(report)}</div>`);
 
-function getHoneydewFullScript(key, names) {
-    if (key === 'A') {
-        return `テレビのニュースからは、元警視総監・九条院司の公判や一連の事件の進展を伝えるアナウンサーの声が虚しく流れているが、マスターはそれに目もくれない。\n\nマスターはふとニュースの音声を消し、誰もいない空間に向けて、酷く甘く美しい声で独りごちる。\n\n<span class="speaker">雨宮千歳</span>「あーあ……。九条様も、あんなに熱心なプレイヤーだったのに。盤面ごとひっくり返されてしまうなんて、不甲斐ない。\nせっかく育てた『可愛い番犬』を、あの野良犬どもに噛み殺させてしまうなんてね……」\n\n彼は磨いていたグラスを静かに置く。そのグラスに血のようにどろりとした、怪しい輝きを放つ赤色の液体（『甘美な蜜』が混ぜられたカクテル）を注ぐ。\n\n<span class="speaker">雨宮千歳</span>「これでお手製の『蜜』もしばらくは在庫限り、ですか。\n……まあ、いいでしょう。\n一つ壊れたところで私の箱庭が濁るわけではありません。\n蜜を欲する犬どもはいくらでも代わりが効きますからね」\n\nマスターは、かつて九条院司が座っていた特等席の椅子を見つめ、三日月のような歪んだ笑顔を浮かべる。\n\n<span class="speaker">雨宮千歳</span>「さて……。次の王は、どなたに就いていただきましょうか？\n……ふふ、ふふふふ……」`;
-    } else if (key === 'B') {
-        return `テレビのニュースからは、特捜班の凄惨な相撃ち事故のニュースが虚しく流れているが、マスターはそれに目もくれない。\n\n重い防音扉が開き、一人の警察官が静かに店内に足を踏み入れた。指先には、硬質で甘い鉄の匂いが微かに染み付いている。それをみたマスターは、いつも通り三日月のような歪んだ笑顔を浮かべ、真紅のカクテルを静かに差し出した。\n\n<span class="speaker">雨宮千歳</span>「あーあ……。せっかく育てた『可愛い番犬』を、あの野良犬どもに噛み殺させてしまうなんてね……。\nお手製の『蜜』もしばらくは在庫限り、ですか。……まあ、いいでしょう。\n一つ壊れたところで、私の箱庭が濁るわけではありません。\nあの箱庭には、父親を遥かに超える、美しく冷酷な『最高傑作』が生き残ったのですから」\n\nマスターは、かつて九条院司が座っていた椅子を指差し、真の王を歓迎するように目を細める。\n\n<span class="speaker">雨宮千歳</span>「さて……。次の王は、貴方に就いていただきましょうか？\nふふ、おめでとうございます、<span class="highlight">${names["[HO3]"]}</span>様。\nこれからは貴方の美学で、新しい箱庭を整えていきましょう。父を継げる最高傑作は貴方なのですから。\nふふ、ふふふふ……」`;
-    } else if (key === 'C') {
-        return `テレビのニュースからは、一連の事件が「容疑者死亡により捜査終結」したこと、そして特捜班の面々が「不慮の事故」で殉職したことを伝えるアナウンサーの声が流れているが、マスターはそれに目もくれない。\n\nカウンターの奥には、警視総監・九条院司が冷たい眼差しで座っていた。\n\n<span class="speaker">九条院司</span>「私の最高傑作として完璧な駒に育て上げたと思っていたが……所詮はこの程度の器に過ぎんかったというわけか」\n\n<span class="speaker">雨宮千歳</span>「おや、冷たいですねえ。ですがご覧の通り。不甲斐ない野良犬どもでしたが、我が子の良い『餌』にはなってくれたようです。見てください、特捜班の肉体をたっぷり喰ったおかげで……これほど極上の『甘美な蜜』が滴っている」\n\n九条院司は満足げに目を細め、その蜜を容器へと回収していく。特捜班という邪魔な駒を処理し、さらなる至高の蜜を手に入れた。九条の帝国はこれからもビクともせず維持され続けるのだ。\n\n<span class="speaker">雨宮千歳</span>「さて……。次の王は、どなたに就いていただきましょうか？ ……ふふ、ふふふふ……」`;
-    } else if (key === 'D') {
-        return `テレビのニュースからは、特捜班の全員が突如として行方をくらませ、警察組織に激震が走っていることを伝えるアナウンサーの声が流れているが、マスターはそれに目もくれない。\n\nマスターはふとニュースの音声を消し、誰もいない空間に向けて、退屈そうに、しかしどこか愉しげに独りごちる。\n\n<span class="speaker">雨宮千歳</span>「あーあ……。せっかく面白いプレイヤーたちが揃っていたのに。まさか全員で盤面を放棄して、箱庭の外へ逃げ出してしまうなんてね。ふふ、不甲斐ないというか、お行儀が悪いというか……」\n\n彼は磨いていたグラスを静かに置く。そのグラスに血のようにどろりとした、怪しい輝きを放つ赤色の液体を注ぐ。\n\n<span class="speaker">雨宮千歳</span>「まあ、いいでしょう。駒がいくつか盤外へ零れ落ちたところで、この広大な箱庭が濁るわけではありません。蜜の味を忘れられない新しい犬どもは、いくらでも代わりが効きますからね」\n\nマスターは三日月のような歪んだ笑顔を浮かべ、誰もいない特等席を見つめる。\n\n<span class="speaker">雨宮千歳</span>「さて……。次の王は、どなたに就いていただきましょうか？\n……ふふ、ふふふふ……」`;
-    } else {
-        return `テレビのニュースからは、特捜班の不祥事や悲惨な共倒れ事故を伝えるアナウンサーの声が流れているが、マスターはそれに目もくれない。\n\nマスターはふとニュースの音声を消し、誰もいない空間に向けて独りごちる。彼は磨いていたグラスを静かに置き、血のようにどろりとした赤色の液体を注ぐ。\n\n<span class="speaker">雨宮千歳</span>「あーあ……。せっかく熱心なプレイヤーたちが揃っていたのに。お互いに噛み殺し合って、盤面をめちゃくちゃにしてしまうなんて不甲斐ない。まあいいでしょう。一つ玩具が壊れたところで、私の箱庭が濁るわけではありません。首輪を欲する犬どもはいくらでも代わりが効きますからね」\n\nマスターは三日月のような歪んだ笑顔を浮かべる。\n\n<span class="speaker">雨宮千歳</span>「さて……。次の王は、どなたに就いていただきましょうか？ ……ふふ、ふふふふ……」`;
+        $('storyOutput').innerHTML = parts.join('');
+        const area = $('storyArea');
+        area.style.display = 'block';
+        area.scrollIntoView({ behavior: 'smooth' });
     }
-}
 
-// エラーが起きないよう修正したテーマ切り替え関数
-function setTheme(themeClass) {
-    document.body.className = themeClass;
-    document.querySelectorAll('.t-btn').forEach(b => b.classList.remove('active'));
-    
-    const styleName = themeClass.replace('theme-', '');
-    const targetBtn = document.querySelector(`.t-btn.${styleName}`);
-    if (targetBtn) {
-        targetBtn.classList.add('active');
+    // ---------- 見出しなどの {HO*} を名前に差し替え ----------
+    const templated = [];
+    function collectTemplates() {
+        const walker = document.createTreeWalker(document.querySelector('.container'), NodeFilter.SHOW_TEXT);
+        let node;
+        while ((node = walker.nextNode())) {
+            if (/\{HO[1-4]\}/.test(node.nodeValue)) templated.push({ node, tpl: node.nodeValue });
+        }
     }
-}
+    function refreshTemplates() {
+        const names = getNames();
+        templated.forEach((t) => { t.node.nodeValue = fillPlain(t.tpl, names); });
+    }
+
+    // ---------- 名前の保存（このブラウザ内のみ） ----------
+    const STORE_KEY = 'hakoniwa-ending-names';
+    function loadNames() {
+        try {
+            const saved = JSON.parse(localStorage.getItem(STORE_KEY) || '{}');
+            HOS.forEach((n) => { if (saved[n]) $(`name_ho${n}`).value = saved[n]; });
+        } catch (e) { /* 保存できない環境では何もしない */ }
+    }
+    function saveNames() {
+        try {
+            const v = {};
+            HOS.forEach((n) => { v[n] = $(`name_ho${n}`).value; });
+            localStorage.setItem(STORE_KEY, JSON.stringify(v));
+        } catch (e) { /* noop */ }
+    }
+
+    // ---------- 起動 ----------
+    function init() {
+        collectTemplates();
+        loadNames();
+        refreshTemplates();
+
+        document.querySelectorAll('input[type="radio"], input[type="checkbox"]').forEach((el) => {
+            el.addEventListener('change', render);
+        });
+        HOS.forEach((n) => {
+            $(`name_ho${n}`).addEventListener('input', () => {
+                saveNames();
+                refreshTemplates();
+                render();
+            });
+        });
+        $('storyBtn').addEventListener('click', buildStory);
+        render();
+    }
+
+    // テスト用に判定関数を公開
+    window.HakoniwaEnding = { evaluate };
+
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+    else init();
+})();

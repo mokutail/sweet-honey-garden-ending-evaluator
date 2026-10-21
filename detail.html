@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>『箱庭に注がれた甘美な蜜』 エンド判定ツール</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* 入力欄のシンプルなデザイン */
+        .name-input-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+        .name-field {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .name-field input {
+            padding: 8px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        /* 確定ボタンの演出 */
+        .action-area {
+            text-align: center;
+            margin: 30px 0;
+        }
+        .submit-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 35px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .submit-btn:hover {
+            background-color: #34495e;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+        /* 結末描写エリア（初期状態は非表示） */
+        .story-area {
+            display: none;
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 25px;
+            margin-top: 20px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+        .story-text {
+            white-space: pre-wrap;
+            font-size: 15px;
+            line-height: 1.8;
+            color: #2c3e50;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>『箱庭に注がれた甘美な蜜』 エンド判定ツール</h1>
+        <p class="subtitle">セッションの最終的な着地点を選択してください</p>
+    </header>
+
+    <!-- ===================== 名前 ===================== -->
+    <div class="section">
+        <h2>探索者名（PC名）の登録</h2>
+        <div class="name-input-grid">
+            <div class="name-field">
+                <label for="name_ho1"><strong>HO1（ルーク）の名前</strong></label>
+                <input type="text" id="name_ho1" value="" placeholder="HO1">
+            </div>
+            <div class="name-field">
+                <label for="name_ho2"><strong>HO2（ナイト）の名前</strong></label>
+                <input type="text" id="name_ho2" value="" placeholder="HO2">
+            </div>
+            <div class="name-field">
+                <label for="name_ho3"><strong>HO3（ビショップ）の名前</strong></label>
+                <input type="text" id="name_ho3" value="" placeholder="HO3">
+            </div>
+            <div class="name-field">
+                <label for="name_ho4"><strong>HO4（キング）の名前</strong></label>
+                <input type="text" id="name_ho4" value="" placeholder="HO4">
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================== 1. 戦闘 ===================== -->
+    <div class="section">
+        <h2>1. アブホースの落とし子との戦闘結果</h2>
+        <div class="radio-group">
+            <label>
+                <input type="radio" name="battle" value="defeat" checked>
+                <div>
+                    <strong>撃破した</strong>
+                    <span class="description">落とし子のHPを0にした。SDカードが現れ、七瀬から電話がかかってくる（エンド分岐の確認処理へ）。途中で逃げたHOがいても、残ったメンバーで撃破したならこちら。</span>
+                </div>
+            </label>
+            <label>
+                <input type="radio" name="battle" value="lose">
+                <div>
+                    <strong>敗北した</strong>
+                    <span class="description">地下室に残ったメンバーが全滅した。→ 全体【END C】</span>
+                </div>
+            </label>
+            <label>
+                <input type="radio" name="battle" value="escape">
+                <div>
+                    <strong>全員が逃走した</strong>
+                    <span class="description">生き残っている全員が〈DEX×5〉2回成功で地下室から逃げ出した。→ 全体【END D】</span>
+                </div>
+            </label>
+        </div>
+    </div>
+
+    <!-- ===================== 2. 各HOの状態 ===================== -->
+    <div class="section">
+        <h2>2. 各HOの最終状態</h2>
+
+        <div class="sub-block">
+            <h3 class="sub-title">HO1（ルーク）</h3>
+            <div class="radio-group">
+                <label><input type="radio" name="ho1_status" value="alive" checked><div><strong>地下室で生存</strong></div></label>
+                <label><input type="radio" name="ho1_status" value="escaped"><div><strong>途中で逃走した</strong><span class="description">戦闘中に一人で逃走に成功した。</span></div></label>
+                <label><input type="radio" name="ho1_status" value="lost"><div><strong>ロスト</strong><span class="description">戦闘・PC間の銃撃戦などで死亡した。</span></div></label>
+            </div>
+            <div class="checkbox-group mt">
+                <label data-req="ho1-alive">
+                    <input type="checkbox" id="ho1_broken">
+                    <div><strong>精神が崩壊している</strong><span class="description">SAN値0、または不定の狂気に陥っている。</span></div>
+                </label>
+            </div>
+        </div>
+
+        <div class="sub-block">
+            <h3 class="sub-title">HO2（ナイト）</h3>
+            <div class="radio-group">
+                <label><input type="radio" name="ho2_status" value="alive" checked><div><strong>地下室で生存</strong></div></label>
+                <label><input type="radio" name="ho2_status" value="escaped"><div><strong>途中で逃走した</strong></div></label>
+                <label><input type="radio" name="ho2_status" value="lost"><div><strong>ロスト</strong></div></label>
+            </div>
+            <div class="checkbox-group mt">
+                <label data-req="ho2-alive">
+                    <input type="checkbox" id="ho2_broken">
+                    <div><strong>精神が崩壊している</strong><span class="description">SAN値0、または不定の狂気に陥っている。</span></div>
+                </label>
+            </div>
+        </div>
+
+        <div class="sub-block">
+            <h3 class="sub-title">HO3（ビショップ）</h3>
+            <div class="radio-group">
+                <label><input type="radio" name="ho3_status" value="alive" checked><div><strong>地下室で生存</strong><span class="description">犯人として捕まったかどうかは「3. 七瀬への報告」で判定します。</span></div></label>
+                <label><input type="radio" name="ho3_status" value="surrender"><div><strong>自首した</strong><span class="description">自ら犯人であると名乗り出た。</span></div></label>
+                <label><input type="radio" name="ho3_status" value="escaped"><div><strong>途中で逃走した</strong></div></label>
+                <label><input type="radio" name="ho3_status" value="killed"><div><strong>正体を暴かれ、HO1に殺害された</strong><span class="description">HO1が真犯人だと確信したうえで手を下した。</span></div></label>
+                <label><input type="radio" name="ho3_status" value="lost"><div><strong>ロスト（上記以外）</strong><span class="description">戦闘や、HO1以外の手による死亡。</span></div></label>
+            </div>
+        </div>
+
+        <div class="sub-block">
+            <h3 class="sub-title">HO4（キング）</h3>
+            <div class="radio-group">
+                <label><input type="radio" name="ho4_status" value="alive" checked><div><strong>地下室で生存</strong></div></label>
+                <label><input type="radio" name="ho4_status" value="escaped"><div><strong>途中で逃走した</strong></div></label>
+                <label><input type="radio" name="ho4_status" value="lost"><div><strong>ロスト</strong></div></label>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================== 3. 七瀬への報告 ===================== -->
+    <div class="section" id="sec_report">
+        <h2>3. 七瀬への報告（21時の「答え」）</h2>
+        <p class="off-note">落とし子を撃破していないため、この項目は判定に使いません。</p>
+
+        <h3 class="sub-title">犯人として報告した人物</h3>
+        <div class="radio-group">
+            <label><input type="radio" name="culprit" value="HO3" checked><div><strong>HO3（真犯人）</strong></div></label>
+            <label><input type="radio" name="culprit" value="HO1"><div><strong>HO1</strong><span class="description">HO1に罪を着せた。</span></div></label>
+            <label><input type="radio" name="culprit" value="HO2"><div><strong>HO2</strong><span class="description">HO2に罪を着せた（自ら名乗り出た場合は「4. HO2の決断」でチェック）。</span></div></label>
+            <label><input type="radio" name="culprit" value="HO4"><div><strong>HO4</strong><span class="description">HO4に罪を着せた。</span></div></label>
+            <label><input type="radio" name="culprit" value="mita"><div><strong>三田慎二／その他の第三者</strong><span class="description">PC以外に罪を擦り付けた。</span></div></label>
+            <label><input type="radio" name="culprit" value="none"><div><strong>報告しなかった／特定できなかった</strong></div></label>
+        </div>
+
+        <h3 class="sub-title mt">SDカード</h3>
+        <div class="checkbox-group">
+            <label>
+                <input type="checkbox" id="sd_reported" checked>
+                <div><strong>SDカードの存在を七瀬に伝え、提出した</strong><span class="description">九条院司の告発に成功した（全体END Aの条件）。</span></div>
+            </label>
+        </div>
+    </div>
+
+    <!-- ===================== 4. HO2の決断 ===================== -->
+    <div class="section" id="sec_ho2">
+        <h2>4. HO2の決断</h2>
+        <p class="off-note">HO2が地下室にいない、または精神崩壊しているため、この項目は判定に使いません。</p>
+        <div class="radio-group">
+            <label><input type="radio" name="ho2_choice" value="A" checked><div><strong>A：{HO4}の道具として生き続ける</strong></div></label>
+            <label><input type="radio" name="ho2_choice" value="B"><div><strong>B：絶望し、死を選ぶ</strong><span class="description">ロスト扱いになります。</span></div></label>
+            <label><input type="radio" name="ho2_choice" value="C"><div><strong>C：{HO4}の道具をやめ、人間としての贖罪を選ぶ</strong></div></label>
+        </div>
+        <div class="checkbox-group mt">
+            <label>
+                <input type="checkbox" id="ho2_confess">
+                <div><strong>7年前の遺体遺棄を含む、すべての罪を自白した</strong></div>
+            </label>
+            <label>
+                <input type="checkbox" id="ho2_volunteer">
+                <div><strong>{HO3}をかばい、自ら真犯人として名乗り出た</strong><span class="description">チェックすると「犯人として報告した人物」はHO2として扱います。</span></div>
+            </label>
+        </div>
+    </div>
+
+    <!-- ===================== 5. 精神崩壊したPCの処遇 ===================== -->
+    <div class="section" id="sec_fate">
+        <h2>5. 精神崩壊したPCの処遇</h2>
+        <p class="off-note">現在、処遇を決める対象がいません（HO1またはHO2が精神崩壊したまま地下室にいる場合に使います）。</p>
+
+        <div class="sub-block" id="blk_ho4_on_ho1">
+            <h3 class="sub-title">{HO4}による、壊れた{HO1}の処理</h3>
+            <div class="radio-group">
+                <label><input type="radio" name="ho4_on_ho1" value="A" checked><div><strong>A：通常通り連れ帰る</strong></div></label>
+                <label><input type="radio" name="ho4_on_ho1" value="B"><div><strong>B：事件のすべての罪を{HO1}に着せ、社会的にも抹殺する</strong></div></label>
+                <label><input type="radio" name="ho4_on_ho1" value="C"><div><strong>C：殉職・行方不明として処理し、私的に監禁・飼育する</strong></div></label>
+            </div>
+        </div>
+
+        <div class="sub-block" id="blk_ho4_on_ho2">
+            <h3 class="sub-title">{HO4}による、壊れた{HO2}の処理</h3>
+            <div class="radio-group">
+                <label><input type="radio" name="ho4_on_ho2" value="A" checked><div><strong>A：通常通り連れ帰る</strong></div></label>
+                <label><input type="radio" name="ho4_on_ho2" value="B"><div><strong>B：今回の事件の犯人として処理する</strong></div></label>
+                <label><input type="radio" name="ho4_on_ho2" value="C"><div><strong>C：殉職・行方不明として処理し、私的に監禁・飼育する</strong></div></label>
+            </div>
+        </div>
+
+        <div class="sub-block" id="blk_ho3_on_ho2">
+            <h3 class="sub-title">{HO3}による、壊れた{HO2}の処理</h3>
+            <span class="description">七瀬に伝える犯人が{HO3}でない場合のみ。</span>
+            <div class="radio-group">
+                <label><input type="radio" name="ho3_on_ho2" value="A" checked><div><strong>A：通常通り連れ帰る</strong></div></label>
+                <label><input type="radio" name="ho3_on_ho2" value="B"><div><strong>B：{HO2}にすべての罪を着せ、日常へ戻る</strong></div></label>
+                <label><input type="radio" name="ho3_on_ho2" value="C"><div><strong>C：{HO4}から奪い、自分のものとして連れ去る</strong></div></label>
+            </div>
+        </div>
+
+        <div class="sub-block" id="blk_ho2_pick">
+            <h3 class="sub-title">{HO3}と{HO4}がともに「C」を選んだ ― {HO2}が選んだ「檻」</h3>
+            <div class="radio-group">
+                <label><input type="radio" name="ho2_pick" value="HO4" checked><div><strong>{HO4}の手を取った</strong><span class="description">「雑巾」として使い潰される安堵。</span></div></label>
+                <label><input type="radio" name="ho2_pick" value="HO3"><div><strong>{HO3}の手を取った</strong><span class="description">「傑作」として飾られる悦び。</span></div></label>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================== 6. HO3単独生存 ===================== -->
+    <div class="section" id="sec_solo">
+        <h2>6. {HO3}以外が全員ロストした場合</h2>
+        <p class="off-note">{HO3}だけが地下室に生き残った場合に使います。</p>
+        <div class="radio-group">
+            <label><input type="radio" name="ho3_solo" value="A" checked><div><strong>A：自首する</strong></div></label>
+            <label><input type="radio" name="ho3_solo" value="B"><div><strong>B：誰かに罪を擦り付け、他のメンバーも完璧な左右対称にする</strong><span class="description">→ 全体【END B】</span></div></label>
+            <label><input type="radio" name="ho3_solo" value="C"><div><strong>C：身代わりを仕立て上げて、日常へ生還する</strong></div></label>
+        </div>
+    </div>
+
+    <div id="resultBox" class="result-area">
+        <div class="result-title">現在の条件による確定ルート</div>
+        <div id="resultName" class="result-name">計算中...</div>
+        <div id="resultDesc" class="result-desc"></div>
+    </div>
+
+    <div class="action-area">
+        <button type="button" class="submit-btn" id="storyBtn">END描写へ</button>
+    </div>
+
+    <div id="storyArea" class="story-area">
+        <h2 style="border-left: 4px solid var(--primary-color); padding-left: 10px; margin-top:0;">📖 終局の物語（エンディング描写）</h2>
+        <div id="storyOutput" class="story-text"></div>
+    </div>
+</div>
+
+<script src="endings.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
