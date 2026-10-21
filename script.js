@@ -416,13 +416,21 @@
         return missing ? '行方不明' : '生還';
     }
 
+    // 誰がどうなったかは伏せ、最後の行に人数だけをまとめる
     function buildReport(res, names) {
+        const count = { '生還': 0, 'ロスト': 0, '行方不明': 0 };
         const lines = HOS.map((n) => {
             const r = res.ind[n];
+            count[reportStatus(n, r)] += 1;
             const code = r.code === null ? `【END ${res.overall}】` : `【END ${res.overall}-${r.code}】`;
             const who = names[n] === `HO${n}` ? `HO${n}` : `HO${n} ${names[n]}`;
-            return `${who}：${code} ${reportStatus(n, r)}`;
+            return `${who}：${code}`;
         });
+        const summary = ['生還', 'ロスト', '行方不明']
+            .filter((k) => count[k] > 0)
+            .map((k) => `${count[k]}${k}`)
+            .join('');
+        lines.push(summary);
         return lines.join('\n');
     }
 
