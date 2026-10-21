@@ -342,16 +342,16 @@
             const data = ENDING_DATA.individual[n];
             const label = `${escapeHtml(names[n])}（HO${n}：${data.label}）`;
             if (r.code === null) {
-                parts.push(`<div class="ind-block"><div class="ind-head">${label} ― 個別END該当なし</div><div class="kp-note">${escapeHtml(r.note)}</div></div>`);
+                parts.push(`<div class="ind-block ho${n}"><div class="ind-head">${label} ― 個別END該当なし</div><div class="kp-note">${escapeHtml(r.note)}</div></div>`);
                 return;
             }
             const end = data.ends[r.code];
-            let inner = `<div class="ind-head">${label} ― 【END ${r.code}】</div>`;
+            let inner = `<div class="ind-head"><span class="ind-badge">HO${n}</span>${label} ― 【END ${r.code}】</div>`;
             inner += `<div class="kp-note">条件：${fill(end.cond, names)}</div>`;
-            if (r.note) inner += `<div class="kp-note">※${escapeHtml(r.note)}</div>`;
+            if (r.note) inner += `<div class="kp-note kp-warn">※${escapeHtml(r.note)}</div>`;
             if (end.text) inner += `<div class="ind-text">${fill(end.text, names)}</div>`;
             else inner += '<div class="kp-note">個別描写なし</div>';
-            parts.push(`<div class="ind-block">${inner}</div>`);
+            parts.push(`<div class="ind-block ho${n}">${inner}</div>`);
         };
 
         const inds = (filter) => {
